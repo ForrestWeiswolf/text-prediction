@@ -1,15 +1,32 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { updateText } from '../store'
+import { connect } from 'react-redux'
 
 const TextInput = props => {
-		return (
-			<div>
-				<input type="text" />
-			</div>
-		)
-	}
-
-TextInput.propTypes = {
+  return (
+    <div>
+      <input
+        type="text"
+        value={props.text}
+        onChange={props.handleChange}
+      />
+    </div>
+  )
 }
 
-export default TextInput
+function mapStateToProps(state) {
+  return { text: state.text }
+}
+
+function mapDispatch(dispatch) {
+  return {
+		handleChange: function(e){
+			dispatch(updateText(e.target.value))
+		}
+	}
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatch
+)(TextInput)
