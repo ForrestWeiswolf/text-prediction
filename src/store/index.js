@@ -1,4 +1,5 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import logger from 'redux-logger'
 
 const initialState = {
   text: '',
@@ -19,5 +20,5 @@ function reducer(prevState = initialState, action) {
   }
 }
 
-const store = createStore(reducer, initialState)
+const store = createStore(reducer, applyMiddleware(logger))
 export default store
