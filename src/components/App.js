@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import './App.css'
-import TextInput from './TextInput.jsx'
 import store from '../store'
 import { Provider } from 'react-redux'
+import TextInput from './TextInput.jsx'
 
 class App extends Component {
   render() {
