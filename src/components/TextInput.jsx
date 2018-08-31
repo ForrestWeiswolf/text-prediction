@@ -2,14 +2,10 @@ import React from 'react'
 import { updateText } from '../store'
 import { connect } from 'react-redux'
 
-const TextInput = props => {
+export const TextInput = props => {
   return (
     <div>
-      <input
-        type="text"
-        value={props.text}
-        onChange={props.handleChange}
-      />
+      <input type="text" value={props.text} onChange={props.handleChange} />
     </div>
   )
 }
@@ -20,10 +16,10 @@ function mapStateToProps(state) {
 
 function mapDispatch(dispatch) {
   return {
-		handleChange: function(e){
-			dispatch(updateText(e.target.value))
-		}
-	}
+    handleChange: function(e) {
+      dispatch(updateText(e.target.value))
+    },
+  }
 }
 
 export default connect(

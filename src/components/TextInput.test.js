@@ -1,12 +1,12 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
-import TextInput from './TextInput.jsx'
+import { TextInput } from './TextInput.jsx'
 
 describe('TextInput', () => {
   let textInput
   beforeEach(() => {
-    textInput = shallow(<TextInput />)
+    textInput = shallow(<TextInput text={'foo'} handleChange={() => {}} />)
   })
 
   it('has a text input', () => {
