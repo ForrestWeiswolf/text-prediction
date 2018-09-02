@@ -1,6 +1,7 @@
 import React from 'react'
 import { updateText } from '../store'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 export const TextInput = props => {
   return (
@@ -9,6 +10,12 @@ export const TextInput = props => {
     </div>
   )
 }
+
+TextInput.propTypes = {
+  text: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired
+}
+
 
 function mapStateToProps(state) {
   return { text: state.text }
