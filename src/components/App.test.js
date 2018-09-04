@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
+import TextInput from './TextInput.jsx'
 import { shallow, mount } from 'enzyme'
 import { expect } from 'chai'
 import { Provider } from 'react-redux'
@@ -24,6 +25,6 @@ describe('provider', () => {
   })
 
   it('renders a TextInput', () => {
-    expect(provider.find('input')).to.have.lengthOf(1)
+    expect(provider.find(TextInput)).to.have.lengthOf(1)
   })
 })
