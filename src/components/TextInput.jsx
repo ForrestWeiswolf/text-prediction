@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 export const TextInput = props => {
   return (
     <div>
-      <input type="text" value={props.text} onChange={props.handleChange} />
+      <textarea value={props.text} onChange={props.handleChange} />
     </div>
   )
 }
