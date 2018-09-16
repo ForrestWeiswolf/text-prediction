@@ -1,5 +1,5 @@
 const express = require('express')
-const readAndBuildTries = require('./readAndBuildTries.js')
+const {readAndBuildTries} = require('./fsUtils.js')
 
 const app = express()
 
