@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
     "build-word-tries": "../build-word-tries",
     "express": "^4.16.3",
     "react": "^16.4.2",
@@ -20,6 +21,7 @@
   },
   "proxy": "http://localhost:8080",
   "devDependencies": {
+    "axios-mock-adapter": "^1.15.0",
     "chai": "^4.1.2",
     "concurrently": "^4.0.1",
     "enzyme": "^3.5.0",
