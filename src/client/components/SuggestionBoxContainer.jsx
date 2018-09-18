@@ -6,15 +6,22 @@ import SuggestionBox from './SuggestionBox.jsx'
 class SuggestionBoxContainer extends Component {
   constructor() {
     super()
+
     this.state = {
       words: [],
     }
+
+    this.isCancelled = false
   }
 
   componentDidMount() {
     axios.get('/api/corpora/testfile').then(res => {
-      this.setState({ words: res.data })
+      this.isCancelled || this.setState({ words: res.data })
     })
+  }
+
+  componentWillUnmount() {
+    this.isCancelled = true
   }
 
   render() {
@@ -23,7 +30,7 @@ class SuggestionBoxContainer extends Component {
     return (
       <div>
         {words.map((word, idx) => (
-          <SuggestionBox value={word} key={idx}/>
+          <SuggestionBox value={word} key={idx} />
         ))}
       </div>
     )
