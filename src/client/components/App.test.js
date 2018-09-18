@@ -4,7 +4,14 @@ import App from './App'
 import TextInput from './TextInput.jsx'
 import { shallow, mount } from 'enzyme'
 import { expect } from 'chai'
+import axios from 'axios'
+import MockAdapter from 'axios-mock-adapter'
 import { Provider } from 'react-redux'
+import { SuggestionBoxContainer } from './SuggestionBoxContainer.jsx'
+
+const mock = new MockAdapter(axios)
+const testReply = ['foo', 'bar', 'baz']
+mock.onGet('/api/corpora/testfile').reply(200, testReply)
 
 describe('App', () => {
   it('renders without crashing', () => {
@@ -22,11 +29,15 @@ describe('App', () => {
     let app
     beforeEach(() => {
       app = mount(<App />)
-      provider = app.find('Provider').first()
+      provider = app.find(Provider).first()
     })
 
     it('renders a TextInput', () => {
       expect(provider.find(TextInput)).to.have.lengthOf(1)
+    })
+
+    it('renders a SuggestionBoxContainer', () => {
+      expect(shallow(<App />).find('SuggestionBoxContainer')).to.have.lengthOf(1)
     })
   })
 })
