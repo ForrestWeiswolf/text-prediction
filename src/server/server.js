@@ -8,11 +8,11 @@ readAndBuildTries('/corpora/testfile.txt', 1, test => {
 
   app.use('/api/testfile/:word', (req, res) => {
     const nextWords = test.get(req.params.word)
-    res.json(nextWords)
+    res.json(nextWords.slice(0, 3))
   })
 
   app.use('/api/testfile', (req, res) => {
-    res.json(test.get())
+    res.json(test.get().slice(0, 3))
   })
 })
 
