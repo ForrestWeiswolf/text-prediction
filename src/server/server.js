@@ -1,17 +1,18 @@
 const express = require('express')
-const {readAndBuildTries} = require('./fsUtils.js')
+const { readAndBuildTries } = require('./fsUtils.js')
 
 const app = express()
 
 readAndBuildTries('/corpora/testfile.txt', 1, test => {
   console.log('Tries ready')
+
   app.use('/api/testfile/:word', (req, res) => {
-    if (req.params.word) {
-      const nextWords = test.get(req.params.word)
-      res.json(nextWords)
-    } else {
-      res.json(test.get())
-    }
+    const nextWords = test.get(req.params.word)
+    res.json(nextWords)
+  })
+
+  app.use('/api/testfile', (req, res) => {
+    res.json(test.get())
   })
 })
 

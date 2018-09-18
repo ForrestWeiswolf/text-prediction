@@ -17,4 +17,4 @@ function readAndBuildTries(filename, depth, callback) {
   )
 }
 
-module.exports = {readAndBuildTries}
+module.exports = { readAndBuildTries }
