@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
+import { connect } from 'react-redux'
 import SuggestionBox from './SuggestionBox.jsx'
 
-class SuggestionBoxContainer extends Component {
+export class SuggestionBoxContainer extends Component {
   constructor() {
     super()
 
@@ -39,4 +40,15 @@ class SuggestionBoxContainer extends Component {
 
 SuggestionBoxContainer.propTypes = {}
 
-export default SuggestionBoxContainer
+function mapStateToProps() {
+  return {}
+}
+
+function mapDispatch(dispatch) {
+  return {}
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatch
+)(SuggestionBoxContainer)

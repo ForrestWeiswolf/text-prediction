@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 import SuggestionBox from './SuggestionBox.jsx'
-import SuggestionBoxContainer from './SuggestionBoxContainer.jsx'
+import { SuggestionBoxContainer } from './SuggestionBoxContainer.jsx'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 
