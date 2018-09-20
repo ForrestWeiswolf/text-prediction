@@ -5,11 +5,11 @@ import { connect } from 'react-redux'
 import SuggestionBox from './SuggestionBox.jsx'
 
 export class SuggestionBoxContainer extends Component {
-  constructor() {
+  constructor(props) {
     super()
 
     this.state = {
-      words: [],
+      suggestions: [],
     }
 
     this.isCancelled = false
@@ -26,19 +26,21 @@ export class SuggestionBoxContainer extends Component {
   }
 
   render() {
-    const words = this.state.words
+    const suggestions = this.state.suggestions
 
     return (
       <div>
-        {words.map((word, idx) => (
-          <SuggestionBox value={word} key={idx} />
+        {suggestions.map((suggestion, idx) => (
+          <SuggestionBox value={suggestion} key={idx} />
         ))}
       </div>
     )
   }
 }
 
-SuggestionBoxContainer.propTypes = {}
+SuggestionBoxContainer.propTypes = {
+  lastWord: PropTypes.string.isRequired,
+}
 
 function mapStateToProps() {
   return {}
