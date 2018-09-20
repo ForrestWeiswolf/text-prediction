@@ -16,8 +16,9 @@ export class SuggestionBoxContainer extends Component {
   }
 
   componentDidMount() {
-    axios.get('/api/corpora/testfile').then(res => {
-      this.isCancelled || this.setState({ words: res.data })
+    const wordRoute = this.props.lastWord ? `/${this.props.lastWord}` : ''
+    axios.get('/api/corpora/testfile' + wordRoute).then(res => {
+      this.isCancelled || this.setState({ suggestions: res.data })
     })
   }
 
@@ -42,8 +43,11 @@ SuggestionBoxContainer.propTypes = {
   lastWord: PropTypes.string.isRequired,
 }
 
-function mapStateToProps() {
-  return {}
+function mapStateToProps(state) {
+  // const words = state.words.split(/\w+/)
+  return {
+    // lastWord: words[words.length - 1],
+  }
 }
 
 function mapDispatch(dispatch) {
