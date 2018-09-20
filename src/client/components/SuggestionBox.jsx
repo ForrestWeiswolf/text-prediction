@@ -26,8 +26,8 @@ function mapStateToProps() {
 
 function mapDispatch(dispatch) {
   return {
-    handleClick: function(toAdd) {
-      dispatch(addToText(toAdd))
+    handleClick: function(word) {
+      dispatch(addToText(word + ' '))
     },
   }
 }
