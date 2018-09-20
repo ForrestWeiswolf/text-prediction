@@ -13,17 +13,26 @@ export class SuggestionBoxContainer extends Component {
     }
 
     this.isCancelled = false
+    this.fetchWords = this.fetchWords.bind(this)
   }
 
   componentDidMount() {
-    const wordRoute = this.props.lastWord ? `/${this.props.lastWord}` : ''
-    axios.get('/api/corpora/testfile' + wordRoute).then(res => {
-      this.isCancelled || this.setState({ suggestions: res.data })
-    })
+    this.fetchWords()
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.fetchWords()
   }
 
   componentWillUnmount() {
     this.isCancelled = true
+  }
+
+  fetchWords() {
+    const wordRoute = this.props.lastWord ? `/${this.props.lastWord}` : ''
+    return axios.get('/api/corpora/testfile' + wordRoute).then(res => {
+      this.isCancelled || this.setState({ suggestions: res.data })
+    })
   }
 
   render() {
@@ -44,9 +53,9 @@ SuggestionBoxContainer.propTypes = {
 }
 
 function mapStateToProps(state) {
-  // const words = state.words.split(/\w+/)
+  const words = state.text.split(/\W+/)
   return {
-    // lastWord: words[words.length - 1],
+    lastWord: words[words.length - 1],
   }
 }
 

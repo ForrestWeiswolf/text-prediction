@@ -12,7 +12,7 @@ class App extends Component {
         <Provider store={store}>
           <div>
             <TextInput />
-            <SuggestionBoxContainer lastWord='' />
+            <SuggestionBoxContainer />
           </div>
         </Provider>
       </div>
