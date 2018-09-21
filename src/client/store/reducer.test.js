@@ -47,4 +47,22 @@ describe('reducer', () => {
       ).to.equal(12)
     })
   })
+
+  describe('when passed UPDATE_SUGGESTIONS action', () => {
+    it('returns an object with the suggestions', () => {
+      const testState = { text: 'bar baz' }
+      expect(
+        reducer(testState, { type: 'UPDATE_SUGGESTIONS', suggestions: ['foo'] })
+          .suggestions
+      ).to.deep.equal(['foo'])
+    })
+
+    it('copies over key/value pairs other than suggestions', () => {
+      const testState = { text: 'bar baz', otherThing: 12 }
+      expect(
+        reducer(testState, { type: 'UPDATE_SUGGESTIONS', suggestions: ['foo'] })
+          .otherThing
+      ).to.equal(12)
+    })
+  })
 })
