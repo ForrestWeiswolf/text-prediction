@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
+import axios from 'axios'
 
 const initialState = {
   text: '',
@@ -21,6 +22,14 @@ export function addToText(newText) {
 
 export function updateSuggestions(suggestions) {
   return { type: UPDATE_SUGGESTIONS, suggestions }
+}
+
+export function fetchSuggestions(lastWord) {
+  return (dispatch) => {
+    return axios.get('/api/corpora/testfile/').then(res => {
+      dispatch(res.data)
+    })
+  }
 }
 
 export function reducer(prevState = initialState, action) {
