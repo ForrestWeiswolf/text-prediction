@@ -29,7 +29,7 @@ export function fetchSuggestions(lastWord) {
 
   return dispatch => {
     return axios.get('/api/corpora/testfile/' + wordRoute).then(res => {
-      dispatch(res.data)
+      dispatch(updateSuggestions(res.data))
     })
   }
 }

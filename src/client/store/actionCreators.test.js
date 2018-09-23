@@ -100,10 +100,12 @@ describe('fetchSuggestions', () => {
       })
     })
 
-    it('calls dispatch on the response', done => {
+    it('dispatches a UPDATE_SUGGESTIONS with the response', done => {
       const dispatchSpy = spy()
       thunk(dispatchSpy).then(() => {
-        expect(dispatchSpy.lastCall.args[0]).to.deep.equal(testResponse)
+        expect(dispatchSpy.lastCall.args[0]).to.deep.equal(
+          updateSuggestions(testResponse)
+        )
         done()
       })
     })
