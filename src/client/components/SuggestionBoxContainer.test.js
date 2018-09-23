@@ -50,4 +50,32 @@ describe('SuggestionBoxContainer', () => {
 
     expect(fetchSpy.calledWith('foo')).to.be.true
   })
+
+  it('fetches suggestions based on new lastWord when componentWillReceiveProps', () => {
+    suggestionBoxContainer.setProps({
+      lastWord: 'foo',
+      suggestions: testSuggestions,
+      fetchSuggestions: fetchSpy,
+    })
+
+    expect(fetchSpy.calledWith('foo')).to.be.true
+  })
+
+  it('doesn\'t fetch suggestions when lastWord isn\'t changed', () => {
+    suggestionBoxContainer.setProps({
+      lastWord: 'foo',
+      suggestions: testSuggestions,
+      fetchSuggestions: fetchSpy,
+    })
+
+    fetchSpy.resetHistory()
+
+    suggestionBoxContainer.setProps({
+      lastWord: 'foo',
+      suggestions: [],
+      fetchSuggestions: fetchSpy,
+    })
+
+    expect(fetchSpy.called).to.be.false
+  })
 })

@@ -12,6 +12,12 @@ export class SuggestionBoxContainer extends Component {
     this.props.fetchSuggestions(this.props.lastWord)
   }
 
+  componentWillReceiveProps(newProps) {
+    if (newProps.lastWord !== this.props.lastWord) {
+      this.props.fetchSuggestions(newProps.lastWord)
+    }
+  }
+
   render() {
     const suggestions = this.props.suggestions
 
