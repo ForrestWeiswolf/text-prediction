@@ -25,8 +25,10 @@ export function updateSuggestions(suggestions) {
 }
 
 export function fetchSuggestions(lastWord) {
+  const wordRoute = lastWord ? lastWord : ''
+
   return (dispatch) => {
-    return axios.get('/api/corpora/testfile/').then(res => {
+    return axios.get('/api/corpora/testfile/' + wordRoute).then(res => {
       dispatch(res.data)
     })
   }

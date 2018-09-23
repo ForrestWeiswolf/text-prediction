@@ -98,6 +98,21 @@ describe('fetchSuggestions', () => {
       })
     })
 
+    it('calls /api/corpora/testfile/:word if fetchSuggestions was passed a word', done => {
+      const fooReplySpy = spy(config => {
+        return [200, testResponse]
+      })
+
+      mock.onGet(/api\/corpora\/testfile\/foo\/?/).reply(fooReplySpy)
+
+      thunk = fetchSuggestions('foo')
+
+      thunk(() => {}).then(() => {
+        expect(fooReplySpy.called).to.be.true
+        done()
+      })
+    })
+
     it('calls dispatch on the response', done => {
       const dispatchSpy = spy()
       thunk(dispatchSpy).then(() => {

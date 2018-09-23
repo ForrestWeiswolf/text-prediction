@@ -30,6 +30,7 @@ export class SuggestionBoxContainer extends Component {
 
   fetchWords() {
     const wordRoute = this.props.lastWord ? `/${this.props.lastWord}` : ''
+
     return axios.get('/api/corpora/testfile' + wordRoute).then(res => {
       this.isCancelled || this.setState({ suggestions: res.data })
     })
