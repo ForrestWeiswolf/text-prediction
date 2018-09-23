@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import SuggestionBox from './SuggestionBox.jsx'
+import { fetchSuggestions } from '../store/index.js'
 
 export class SuggestionBoxContainer extends Component {
   constructor(props) {
