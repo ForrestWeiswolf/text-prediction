@@ -11,7 +11,7 @@ import SuggestionBoxContainer from './SuggestionBoxContainer.jsx'
 
 const mock = new MockAdapter(axios)
 const testReply = ['foo', 'bar', 'baz']
-mock.onGet('/api/corpora/testfile').reply(200, testReply)
+mock.onGet(/\/api(\/w+)*/).reply(200, testReply)
 
 describe('App', () => {
   it('renders without crashing', () => {
