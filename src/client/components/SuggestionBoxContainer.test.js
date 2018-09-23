@@ -2,14 +2,24 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 import SuggestionBox from './SuggestionBox.jsx'
+import { spy } from 'sinon'
+import { fetchSuggestions } from '../store'
 import { SuggestionBoxContainer } from './SuggestionBoxContainer.jsx'
 
 describe('SuggestionBoxContainer', () => {
   let suggestionBoxContainer
+  let fetchSpy
   const testSuggestions = ['foo', 'bar', 'baz']
+
   beforeEach(() => {
+    fetchSpy = spy(() => {})
+
     suggestionBoxContainer = shallow(
-      <SuggestionBoxContainer lastWord="" suggestions={testSuggestions} />
+      <SuggestionBoxContainer
+        lastWord=""
+        suggestions={testSuggestions}
+        fetchSuggestions={fetchSpy}
+      />
     )
   })
 
@@ -23,5 +33,21 @@ describe('SuggestionBoxContainer', () => {
     testSuggestions.forEach((word, idx) => {
       expect(boxes.at(idx).props().value).to.equal(word)
     })
+  })
+
+  it('fetches suggestions when rendered', () => {
+    expect(fetchSpy.called).to.be.true
+  })
+
+  it('fetches suggestions based on lastWord', () => {
+    suggestionBoxContainer = shallow(
+      <SuggestionBoxContainer
+        lastWord="foo"
+        suggestions={testSuggestions}
+        fetchSuggestions={fetchSpy}
+      />
+    )
+
+    expect(fetchSpy.calledWith('foo')).to.be.true
   })
 })

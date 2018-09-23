@@ -8,6 +8,10 @@ export class SuggestionBoxContainer extends Component {
     super()
   }
 
+  componentDidMount() {
+    this.props.fetchSuggestions(this.props.lastWord)
+  }
+
   render() {
     const suggestions = this.props.suggestions
 
@@ -34,7 +38,11 @@ function mapStateToProps(state) {
 }
 
 function mapDispatch(dispatch) {
-  return {}
+  return {
+    fetchSuggestions: lastWord => {
+      dispatch(fetchSuggestions(lastWord))
+    },
+  }
 }
 
 export default connect(
