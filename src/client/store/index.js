@@ -10,7 +10,6 @@ const initialState = {
 
 const UPDATE_TEXT = 'UPDATE_TEXT'
 const ADD_TO_TEXT = 'ADD_TO_TEXT'
-const FETCH_SUGGESTIONS = 'FETCH_SUGGESTIONS'
 const UPDATE_SUGGESTIONS = 'UPDATE_SUGGESTIONS'
 
 export function updateText(newText) {
