@@ -27,7 +27,7 @@ export function updateSuggestions(suggestions) {
 export function fetchSuggestions(lastWord) {
   const wordRoute = lastWord ? lastWord : ''
 
-  return (dispatch) => {
+  return dispatch => {
     return axios.get('/api/corpora/testfile/' + wordRoute).then(res => {
       dispatch(res.data)
     })
@@ -39,7 +39,9 @@ export function reducer(prevState = initialState, action) {
     case UPDATE_TEXT:
       return Object.assign({}, prevState, { text: action.newText })
     case ADD_TO_TEXT:
-      return Object.assign({}, prevState, { text: prevState.text + action.newText })
+      return Object.assign({}, prevState, {
+        text: prevState.text + action.newText,
+      })
     case UPDATE_SUGGESTIONS:
       return Object.assign({}, prevState, { suggestions: action.suggestions })
     default:
