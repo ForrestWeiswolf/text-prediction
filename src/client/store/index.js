@@ -5,6 +5,7 @@ import axios from 'axios'
 
 const initialState = {
   text: '',
+  suggestions: [],
 }
 
 const UPDATE_TEXT = 'UPDATE_TEXT'
