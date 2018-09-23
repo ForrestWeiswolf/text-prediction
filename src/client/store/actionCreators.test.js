@@ -51,19 +51,6 @@ describe('updateSuggestions', () => {
   })
 })
 
-// it('calls to /api/corpora/testfile with its lastWord prop', done => {
-//   const replySpy = spy(config => [200, testReply])
-
-//   mock.onGet(/api\/corpora\/testfile\/foo\/?/).reply(replySpy)
-
-//   suggestionBoxContainer = shallow(<SuggestionBoxContainer lastWord="foo" />)
-
-//   setImmediate(() => {
-//     expect(replySpy.called).to.be.true
-//     done()
-//   })
-// })
-
 describe('fetchSuggestions', () => {
   const mock = new MockAdapter(axios)
   const testResponse = ['foo', 'bar', 'baz']
