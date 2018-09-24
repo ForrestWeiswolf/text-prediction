@@ -2,7 +2,7 @@ import React from 'react'
 import './SuggestionBox.css'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { addToText } from '../store'
+import { addToText, fetchSuggestions } from '../store'
 
 export const SuggestionBox = props => {
   return (
@@ -28,6 +28,7 @@ function mapDispatch(dispatch) {
   return {
     handleClick: function(word) {
       dispatch(addToText(word + ' '))
+      dispatch(fetchSuggestions(word))
     },
   }
 }
