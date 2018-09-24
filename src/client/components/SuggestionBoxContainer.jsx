@@ -33,7 +33,7 @@ export class SuggestionBoxContainer extends Component {
 }
 
 SuggestionBoxContainer.propTypes = {
-  lastWord: PropTypes.string.isRequired,
+  lastWord: PropTypes.string,
 }
 
 function mapStateToProps(state) {
