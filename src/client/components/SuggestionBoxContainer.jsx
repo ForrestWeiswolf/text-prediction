@@ -37,7 +37,7 @@ SuggestionBoxContainer.propTypes = {
 }
 
 function mapStateToProps(state) {
-  const words = state.text.split(/\W+/)
+  const words = state.text.split(/\W+/).filter(word => word !== '')
   return {
     lastWord: words[words.length - 1],
     suggestions: state.suggestions,
