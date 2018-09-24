@@ -6,6 +6,7 @@ import axios from 'axios'
 const initialState = {
   text: '',
   suggestions: [],
+  corpus: 'testfile'
 }
 
 const UPDATE_TEXT = 'UPDATE_TEXT'
@@ -29,12 +30,12 @@ export function switchCorpus(corpus) {
   return { type: SWITCH_CORPUS, corpus }
 }
 
-
 export function fetchSuggestions(lastWord) {
   const wordRoute = lastWord ? lastWord : ''
 
-  return dispatch => {
-    return axios.get('/api/corpora/testfile/' + wordRoute).then(res => {
+  return (dispatch, getState) => {
+
+    return axios.get(`/api/corpora/${getState().corpus}/` + wordRoute).then(res => {
       dispatch(updateSuggestions(res.data))
     })
   }

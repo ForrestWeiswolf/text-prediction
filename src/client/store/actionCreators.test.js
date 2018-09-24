@@ -75,18 +75,31 @@ describe('fetchSuggestions', () => {
 
   describe('returned thunk', () => {
     let thunk
+    let getStateSpy
     beforeEach(() => {
+      getStateSpy = spy(() => {
+        return {
+          corpus: 'testfile',
+        }
+      })
       thunk = fetchSuggestions()
     })
 
-    it('calls /api/corpora/testfile', done => {
-      thunk(() => {}).then(() => {
+    it('gets corpus name from store', done => {
+      thunk(() => {}, getStateSpy).then(() => {
+        expect(getStateSpy.called).to.be.true
+        done()
+      })
+    })
+
+    it('calls /api/corpora/:corpus', done => {
+      thunk(() => {}, getStateSpy).then(() => {
         expect(replySpy.called).to.be.true
         done()
       })
     })
 
-    it('calls /api/corpora/testfile/:word if fetchSuggestions was passed a word', done => {
+    it('calls /api/corpora/:corpus/:word if fetchSuggestions was passed a word', done => {
       const fooReplySpy = spy(config => {
         return [200, testResponse]
       })
@@ -95,7 +108,7 @@ describe('fetchSuggestions', () => {
 
       thunk = fetchSuggestions('foo')
 
-      thunk(() => {}).then(() => {
+      thunk(() => {}, getStateSpy).then(() => {
         expect(fooReplySpy.called).to.be.true
         done()
       })
@@ -103,7 +116,7 @@ describe('fetchSuggestions', () => {
 
     it('dispatches a UPDATE_SUGGESTIONS with the response', done => {
       const dispatchSpy = spy()
-      thunk(dispatchSpy).then(() => {
+      thunk(dispatchSpy, getStateSpy).then(() => {
         expect(dispatchSpy.lastCall.args[0]).to.deep.equal(
           updateSuggestions(testResponse)
         )
