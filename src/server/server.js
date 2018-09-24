@@ -3,7 +3,7 @@ const { readAndBuildTries } = require('./fsUtils.js')
 
 const app = express()
 
-readAndBuildTries('/corpora/testfile.txt', 1, test => {
+readAndBuildTries('/corpora/testfile.txt', 24, null, 1, test => {
   console.log('Tries ready')
 
   app.use('/api/corpora/testfile/:word', (req, res) => {
