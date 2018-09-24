@@ -1,5 +1,9 @@
 .suggestionBox {
-  border: 1px solid black;
+  border: 3px solid #bbbbbb;
   border-radius: 1em;
+  font-family: Tahoma, sans-serif;
   flex-basis: content;
+  width: 30%;
+  justify-content: center;
+  display: inline-flex;
 }
