@@ -11,6 +11,7 @@ const initialState = {
 const UPDATE_TEXT = 'UPDATE_TEXT'
 const ADD_TO_TEXT = 'ADD_TO_TEXT'
 const UPDATE_SUGGESTIONS = 'UPDATE_SUGGESTIONS'
+const SWITCH_CORPUS = 'SWITCH_CORPUS'
 
 export function updateText(newText) {
   return { type: UPDATE_TEXT, newText }
@@ -23,6 +24,11 @@ export function addToText(newText) {
 export function updateSuggestions(suggestions) {
   return { type: UPDATE_SUGGESTIONS, suggestions }
 }
+
+export function switchCorpus(corpus) {
+  return { type: SWITCH_CORPUS, corpus }
+}
+
 
 export function fetchSuggestions(lastWord) {
   const wordRoute = lastWord ? lastWord : ''
@@ -44,6 +50,8 @@ export function reducer(prevState = initialState, action) {
       })
     case UPDATE_SUGGESTIONS:
       return Object.assign({}, prevState, { suggestions: action.suggestions })
+    case SWITCH_CORPUS:
+      return Object.assign({}, prevState, { corpus: action.corpus })
     default:
       return prevState
   }

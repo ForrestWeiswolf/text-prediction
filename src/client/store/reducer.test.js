@@ -65,4 +65,36 @@ describe('reducer', () => {
       ).to.equal(12)
     })
   })
+
+  describe('SWITCH_CORPUS action', () => {
+    it('returns an object with the new corpus', () => {
+      const testState = {
+        corpus: 'Copper, Silver, Gold: an Indestructible Metallic Alloy',
+      }
+      expect(
+        reducer(testState, {
+          type: 'SWITCH_CORPUS',
+          corpus:
+            'Giraffes, Elephants, Baboons: An Equatorial Grasslands Bestiary',
+        }).corpus
+      ).to.deep.equal(
+        'Giraffes, Elephants, Baboons: An Equatorial Grasslands Bestiary'
+      )
+    })
+
+    it('copies over key/value pairs other than suggestions', () => {
+      const testState = {
+        corpus:
+          'Giraffes, Elephants, Baboons: An Equatorial Grasslands Bestiary',
+        otherThing: 12,
+      }
+      expect(
+        reducer(testState, {
+          type: 'SWITCH_CORPUS',
+          corpus:
+            'Giraffes, Elephants, Baboons: An Equatorial Grasslands Bestiary',
+        }).otherThing
+      ).to.equal(12)
+    })
+  })
 })

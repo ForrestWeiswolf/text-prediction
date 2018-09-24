@@ -7,6 +7,7 @@ import {
   addToText,
   updateSuggestions,
   fetchSuggestions,
+  switchCorpus,
 } from './index'
 
 describe('updateText', () => {
@@ -109,5 +110,19 @@ describe('fetchSuggestions', () => {
         done()
       })
     })
+  })
+})
+
+describe('switchCorpus', () => {
+  it('is a function', () => {
+    expect(switchCorpus).to.be.a('function')
+  })
+
+  it('creates an action with type SWITCH_CORPUS', () => {
+    expect(switchCorpus('foo').type).to.equal('SWITCH_CORPUS')
+  })
+
+  it('creates an action with passed argument as newText prop', () => {
+    expect(switchCorpus('foo').corpus).to.equal('foo')
   })
 })
