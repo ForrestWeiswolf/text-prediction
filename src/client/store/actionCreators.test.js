@@ -8,6 +8,8 @@ import {
   updateSuggestions,
   fetchSuggestions,
   switchCorpus,
+  getCorpora,
+  fetchCorpora,
 } from './index'
 
 describe('updateText', () => {
@@ -137,5 +139,57 @@ describe('switchCorpus', () => {
 
   it('creates an action with passed argument as newText prop', () => {
     expect(switchCorpus('foo').corpus).to.equal('foo')
+  })
+})
+
+xdescribe('fetchCorpora', () => {
+  const mock = new MockAdapter(axios)
+  const testResponse = ['foo', 'bar', 'baz']
+  const replySpy = spy(config => {
+    return [200, testResponse]
+  })
+
+  mock.onGet(/api\/corpora\/?$/).reply(replySpy)
+
+  afterAll(() => {
+    mock.restore()
+  })
+
+  it('is a function', () => {
+    expect(fetchCorpora).to.be.a('function')
+  })
+
+  it('returns a function', () => {
+    expect(fetchCorpora()).to.be.a('function')
+  })
+
+  describe('returned thunk', () => {
+    let thunk
+
+    beforeEach(() => {
+      getStateSpy = spy(() => {
+        return {
+          corpus: 'testfile',
+        }
+      })
+      thunk = fetchCorpora()
+    })
+
+    it('calls /api/corpora', done => {
+      thunk(() => {}, getStateSpy).then(() => {
+        expect(replySpy.called).to.be.true
+        done()
+      })
+    })
+
+    it('dispatches a GET_CORPORA with the response', done => {
+      const dispatchSpy = spy()
+      thunk(dispatchSpy, getStateSpy).then(() => {
+        expect(dispatchSpy.lastCall.args[0]).to.deep.equal(
+          getCorpora(testResponse)
+        )
+        done()
+      })
+    })
   })
 })
