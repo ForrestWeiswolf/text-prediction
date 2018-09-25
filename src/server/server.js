@@ -8,4 +8,8 @@ list.forEach(file => {
   createRoutesFromFile(file, app)
 })
 
+app.get('/api/corpora', (req, res) => {
+  res.send(list.map(file => file.name))
+})
+
 module.exports = app
