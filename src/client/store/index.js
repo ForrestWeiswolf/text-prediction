@@ -6,13 +6,15 @@ import axios from 'axios'
 const initialState = {
   text: '',
   suggestions: [],
-  corpus: 'inexorability'
+  corpus: 'inexorability',
+  corpora: []
 }
 
 const UPDATE_TEXT = 'UPDATE_TEXT'
 const ADD_TO_TEXT = 'ADD_TO_TEXT'
 const UPDATE_SUGGESTIONS = 'UPDATE_SUGGESTIONS'
 const SWITCH_CORPUS = 'SWITCH_CORPUS'
+const GET_CORPORA = 'GET_CORPORA'
 
 export function updateText(newText) {
   return { type: UPDATE_TEXT, newText }
@@ -28,6 +30,10 @@ export function updateSuggestions(suggestions) {
 
 export function switchCorpus(corpus) {
   return { type: SWITCH_CORPUS, corpus }
+}
+
+export function getCorpora(corpora) {
+  return { type: GET_CORPORA, corpora }
 }
 
 export function fetchSuggestions(lastWord) {
@@ -53,6 +59,8 @@ export function reducer(prevState = initialState, action) {
       return Object.assign({}, prevState, { suggestions: action.suggestions })
     case SWITCH_CORPUS:
       return Object.assign({}, prevState, { corpus: action.corpus })
+    case GET_CORPORA:
+      return Object.assign({}, prevState, { corpora: action.corpora })
     default:
       return prevState
   }
