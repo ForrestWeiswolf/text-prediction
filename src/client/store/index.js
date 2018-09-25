@@ -7,7 +7,7 @@ const initialState = {
   text: '',
   suggestions: [],
   corpus: 'inexorability',
-  corpora: []
+  corpora: [],
 }
 
 const UPDATE_TEXT = 'UPDATE_TEXT'
@@ -40,10 +40,11 @@ export function fetchSuggestions(lastWord) {
   const wordRoute = lastWord ? lastWord : ''
 
   return (dispatch, getState) => {
-
-    return axios.get(`/api/corpora/${getState().corpus}/` + wordRoute).then(res => {
-      dispatch(updateSuggestions(res.data))
-    })
+    return axios
+      .get(`/api/corpora/${getState().corpus}/` + wordRoute)
+      .then(res => {
+        dispatch(updateSuggestions(res.data))
+      })
   }
 }
 
