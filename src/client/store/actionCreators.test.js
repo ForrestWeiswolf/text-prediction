@@ -61,7 +61,7 @@ describe('fetchSuggestions', () => {
     return [200, testResponse]
   })
 
-  mock.onGet(/api\/corpora\/testfile\/?$/).reply(replySpy)
+  mock.onGet(/api\/corpus\/testfile\/?$/).reply(replySpy)
 
   afterAll(() => {
     mock.restore()
@@ -94,19 +94,19 @@ describe('fetchSuggestions', () => {
       })
     })
 
-    it('calls /api/corpora/:corpus', done => {
+    it('calls /api/corpus/:corpus', done => {
       thunk(() => {}, getStateSpy).then(() => {
         expect(replySpy.called).to.be.true
         done()
       })
     })
 
-    it('calls /api/corpora/:corpus/:word if fetchSuggestions was passed a word', done => {
+    it('calls /api/corpus/:corpus/:word if fetchSuggestions was passed a word', done => {
       const fooReplySpy = spy(config => {
         return [200, testResponse]
       })
 
-      mock.onGet(/api\/corpora\/testfile\/foo\/?/).reply(fooReplySpy)
+      mock.onGet(/api\/corpus\/testfile\/foo\/?/).reply(fooReplySpy)
 
       thunk = fetchSuggestions('foo')
 

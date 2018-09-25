@@ -41,7 +41,7 @@ export function fetchSuggestions(lastWord) {
 
   return (dispatch, getState) => {
     return axios
-      .get(`/api/corpora/${getState().corpus}/` + wordRoute)
+      .get(`/api/corpus/${getState().corpus}/` + wordRoute)
       .then(res => {
         dispatch(updateSuggestions(res.data))
       })

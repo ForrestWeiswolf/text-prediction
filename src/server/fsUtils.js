@@ -27,12 +27,12 @@ function createRoutesFromFile(file, app) {
     trie => {
       console.log(`Loaded ${file.name}`)
 
-      app.use(`/api/corpora/${file.name}/:word`, (req, res) => {
+      app.use(`/api/corpus/${file.name}/:word`, (req, res) => {
         const nextWords = trie.get(req.params.word)
         res.json(nextWords.slice(0, 3))
       })
 
-      app.use(`/api/corpora/${file.name}`, (req, res) => {
+      app.use(`/api/corpus/${file.name}`, (req, res) => {
         res.json(trie.get().slice(0, 3))
       })
     }
