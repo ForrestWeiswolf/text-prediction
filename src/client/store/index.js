@@ -6,7 +6,7 @@ import axios from 'axios'
 const initialState = {
   text: '',
   suggestions: [],
-  corpus: 'testfile'
+  corpus: 'inexorability'
 }
 
 const UPDATE_TEXT = 'UPDATE_TEXT'
