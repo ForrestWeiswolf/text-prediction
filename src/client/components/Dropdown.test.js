@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
-import Dropdown from './Dropdown.jsx'
+import { Dropdown } from './Dropdown.jsx'
 
 describe('Dropdown', () => {
 	const testCorpora = ['foo', 'bar']
