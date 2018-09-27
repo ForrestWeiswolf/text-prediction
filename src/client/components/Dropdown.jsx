@@ -1,25 +1,33 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { fetchCorpora } from '../store/index.js'
 
-export const Dropdown = props => {
-  return (
-    <div>
-      <select>
-        {props.corpora.map(corpusName => {
-          return (
-            <option value={corpusName} key={corpusName}>
-              {corpusName}
-            </option>
-          )
-        })}
-      </select>
-    </div>
-  )
+export class Dropdown extends Component {
+	componentWillMount(){
+		this.props.fetchCorpora()
+	}
+
+  render() {
+    return (
+      <div>
+        <select>
+          {this.props.corpora.map(corpusName => {
+            return (
+              <option value={corpusName} key={corpusName}>
+                {corpusName}
+              </option>
+            )
+          })}
+        </select>
+      </div>
+    )
+  }
 }
 
 Dropdown.propTypes = {
   corpora: PropTypes.arrayOf(PropTypes.string).isRequired,
+  fetchCorpora: PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state) {
@@ -27,7 +35,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatch(dispatch) {
-  return {}
+  return {
+    fetchCorpora: () => dispatch(fetchCorpora()),
+  }
 }
 
 export default connect(

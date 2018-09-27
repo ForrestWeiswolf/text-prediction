@@ -1,17 +1,28 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
+import { spy } from 'sinon'
 import { Dropdown } from './Dropdown.jsx'
 
 describe('Dropdown', () => {
   const testCorpora = ['foo', 'bar']
   let dropdown
   beforeEach(() => {
-    dropdown = shallow(<Dropdown corpora={testCorpora} />)
+    dropdown = shallow(
+      <Dropdown corpora={testCorpora} fetchCorpora={() => {}} />
+    )
   })
 
   it('Renders a <select></select>', () => {
     expect(dropdown.find('select').length).to.equal(1)
+  })
+
+  it('fetches corpora', () => {
+    let fetchSpy = new spy()
+    dropdown = shallow(
+      <Dropdown corpora={testCorpora} fetchCorpora={fetchSpy} />
+    )
+    expect(fetchSpy.called).to.be.true
   })
 
   describe('select', () => {
