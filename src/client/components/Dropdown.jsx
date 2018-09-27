@@ -2,12 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-const Dropdown = props => {
+export const Dropdown = props => {
   return (
     <div>
       <select>
-        {props.corpora.map((corpusName) => {
-          return <option value={corpusName} key={corpusName}>{corpusName}</option>
+        {props.corpora.map(corpusName => {
+          return (
+            <option value={corpusName} key={corpusName}>
+              {corpusName}
+            </option>
+          )
         })}
       </select>
     </div>
