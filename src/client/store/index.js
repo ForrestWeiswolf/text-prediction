@@ -36,6 +36,16 @@ export function getCorpora(corpora) {
   return { type: GET_CORPORA, corpora }
 }
 
+export function fetchCorpora() {
+  return dispatch => {
+    return axios
+      .get('/api/corpora/')
+      .then(res => {
+        dispatch(getCorpora(res.data))
+      })
+  }
+}
+
 export function fetchSuggestions(lastWord) {
   const wordRoute = lastWord ? lastWord : ''
 
