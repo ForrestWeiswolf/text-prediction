@@ -75,7 +75,7 @@ describe('fetchSuggestions', () => {
         return [200, testResponse]
       })
 
-      mock.onGet('/api/corpus/testfile/foo/').reply(fooReplySpy)
+      mock.onGet(/\/api\/corpus\/testfile\/foo\/?/).reply(fooReplySpy)
 
       thunk = fetchSuggestions('foo')
 

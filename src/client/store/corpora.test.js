@@ -26,7 +26,6 @@ describe('fetchCorpora', () => {
 
   const testResponse = ['foo', 'bar', 'baz']
   const replySpy = spy(config => {
-    console.log(config)
     return [200, testResponse]
   })
 
