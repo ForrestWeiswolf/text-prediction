@@ -4,7 +4,7 @@ import store from '../store'
 import { Provider } from 'react-redux'
 import TextInput from './TextInput.jsx'
 import SuggestionBoxContainer from './SuggestionBoxContainer.jsx'
-
+import Dropdown from './Dropdown.jsx'
 class App extends Component {
   render() {
     return (
@@ -13,6 +13,7 @@ class App extends Component {
           <div>
             <TextInput />
             <SuggestionBoxContainer />
+            <Dropdown />
           </div>
         </Provider>
       </div>
