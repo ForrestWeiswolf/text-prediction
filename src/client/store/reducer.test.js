@@ -97,4 +97,20 @@ describe('reducer', () => {
       ).to.equal(12)
     })
   })
+
+  describe('when passed GET_CORPORA action', () => {
+    it('returns an object with the corpora', () => {
+      const testState = { corpora: [] }
+      expect(
+        reducer(testState, { type: 'GET_CORPORA', corpora: ['foo'] }).corpora
+      ).to.deep.equal(['foo'])
+    })
+
+    it('copies over key/value pairs other than suggestions', () => {
+      const testState = { corpora: [], otherThing: 12 }
+      expect(
+        reducer(testState, { type: 'GET_CORPORA', corpora: ['foo'] }).otherThing
+      ).to.equal(12)
+    })
+  })
 })

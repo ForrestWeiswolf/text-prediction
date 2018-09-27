@@ -18,6 +18,20 @@ describe('switchCorpus', () => {
   })
 })
 
+describe('getCorpora', () => {
+  it('is a function', () => {
+    expect(getCorpora).to.be.a('function')
+  })
+
+  it('creates an action with type GET_CORPORA', () => {
+    expect(getCorpora('foo').type).to.equal('GET_CORPORA')
+  })
+
+  it('creates an action with passed argument as newText prop', () => {
+    expect(getCorpora('foo').corpora).to.equal('foo')
+  })
+})
+
 describe('fetchCorpora', () => {
   // Due to some kind of issue with axios-mock-adaptor, these tests fail unless
   // the tests for fetchSuggestions are commented out, and vice-versa.
