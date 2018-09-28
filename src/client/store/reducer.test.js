@@ -102,8 +102,25 @@ describe('reducer', () => {
     it('returns an object with the corpora', () => {
       const testState = { corpora: [] }
       expect(
-        reducer(testState, { type: 'GET_CORPORA', corpora: ['foo'] }).corpora
+        reducer(testState, { type: 'GET_CORPORA', corpora: ['foo'] })
+          .corpora
       ).to.deep.equal(['foo'])
+    })
+
+    it('if state.corpus was falsey, sets it to the first corpus', () => {
+      const testState = { corpora: [] }
+      expect(
+        reducer(testState, { type: 'GET_CORPORA', corpora: ['foo'] })
+          .corpus
+      ).to.equal('foo')
+    })
+
+    it('if state.corpus was truthy, leaves it unchanged', () => {
+      const testState = { corpora: [], corpus: 'bar' }
+      expect(
+        reducer(testState, { type: 'GET_CORPORA', corpora: ['foo'] })
+          .corpus
+      ).to.equal('bar')
     })
 
     it('copies over key/value pairs other than suggestions', () => {

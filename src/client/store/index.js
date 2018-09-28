@@ -78,7 +78,10 @@ export function reducer(prevState = initialState, action) {
     case SWITCH_CORPUS:
       return Object.assign({}, prevState, { corpus: action.corpus })
     case GET_CORPORA:
-      return Object.assign({}, prevState, { corpora: action.corpora })
+      return Object.assign({}, prevState, {
+        corpora: action.corpora,
+        corpus: prevState.corpus || action.corpora[0],
+      })
     default:
       return prevState
   }
