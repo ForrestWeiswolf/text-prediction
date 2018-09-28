@@ -83,4 +83,18 @@ describe('SuggestionBoxContainer', () => {
 
     expect(fetchSpy.called).to.be.false
   })
+
+  it("doesn't fetch suggestions when selectedCorpus is falsey", () => {
+    fetchSpy.resetHistory()
+
+    suggestionBoxContainer.setProps({
+      lastWord: 'foo',
+      selectedCorpus: null,
+      suggestions: [],
+      fetchSuggestions: fetchSpy,
+    })
+
+    expect(fetchSpy.called).to.be.false
+  })
+
 })

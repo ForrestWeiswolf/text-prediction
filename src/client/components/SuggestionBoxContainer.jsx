@@ -10,11 +10,19 @@ export class SuggestionBoxContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchSuggestions(this.props.lastWord, this.props.selectedCorpus)
+    if (this.props.selectedCorpus) {
+      this.props.fetchSuggestions(
+        this.props.lastWord,
+        this.props.selectedCorpus
+      )
+    }
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.lastWord !== this.props.lastWord || newProps.selectedCorpus !== this.props.selectedCorpus) {
+    const changedWord = newProps.lastWord !== this.props.lastWord
+    const changedCorpus = newProps.selectedCorpus !== this.props.selectedCorpus
+
+    if (newProps.selectedCorpus && (changedWord || changedCorpus)) {
       this.props.fetchSuggestions(newProps.lastWord, newProps.selectedCorpus)
     }
   }
@@ -41,7 +49,7 @@ function mapStateToProps(state) {
   return {
     lastWord: words[words.length - 1],
     suggestions: state.suggestions,
-    selectedCorpus: state.selectedCorpus
+    selectedCorpus: state.selectedCorpus,
   }
 }
 
