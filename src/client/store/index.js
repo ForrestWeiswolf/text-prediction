@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-// import logger from 'redux-logger'
+import logger from 'redux-logger'
 import axios from 'axios'
 
 const initialState = {
@@ -85,5 +85,5 @@ export function reducer(prevState = initialState, action) {
   }
 }
 
-const store = createStore(reducer, applyMiddleware(thunk))
+const store = createStore(reducer, applyMiddleware(logger, thunk))
 export default store

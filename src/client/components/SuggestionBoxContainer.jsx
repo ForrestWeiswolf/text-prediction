@@ -14,8 +14,8 @@ export class SuggestionBoxContainer extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.lastWord !== this.props.lastWord) {
-      this.props.fetchSuggestions(newProps.lastWord)
+    if (newProps.lastWord !== this.props.lastWord || newProps.selectedCorpus !== this.props.selectedCorpus) {
+      this.props.fetchSuggestions(newProps.lastWord, newProps.selectedCorpus)
     }
   }
 
@@ -41,13 +41,14 @@ function mapStateToProps(state) {
   return {
     lastWord: words[words.length - 1],
     suggestions: state.suggestions,
+    selectedCorpus: state.selectedCorpus
   }
 }
 
 function mapDispatch(dispatch) {
   return {
-    fetchSuggestions: lastWord => {
-      dispatch(fetchSuggestions(lastWord))
+    fetchSuggestions: (lastWord, selectedCorpus) => {
+      dispatch(fetchSuggestions(lastWord, selectedCorpus))
     },
   }
 }
