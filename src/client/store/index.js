@@ -47,14 +47,21 @@ export function fetchCorpora() {
 }
 
 export function fetchSuggestions(lastWord) {
-  const wordRoute = lastWord ? lastWord : ''
-
   return (dispatch, getState) => {
-    return axios
-      .get(`/api/corpus/${getState().corpus}/` + wordRoute)
-      .then(res => {
+    const corpus = getState().corpus
+    const wordRoute = lastWord ? lastWord : ''
+
+    if (corpus) {
+      return axios.get(`/api/corpus/${corpus}/` + wordRoute).then(res => {
         dispatch(updateSuggestions(res.data))
       })
+    } else {
+      // if there's no corpus selected, do nothing
+      // but return a promise in case this is being .then chained
+      return new Promise((resolve, reject) => {
+        resolve()
+      })
+    }
   }
 }
 
