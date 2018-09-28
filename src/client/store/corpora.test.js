@@ -2,19 +2,19 @@ import { expect } from 'chai'
 import axios from 'axios'
 import { spy } from 'sinon'
 import MockAdapter from 'axios-mock-adapter'
-import { switchCorpus, getCorpora, fetchCorpora } from './index'
+import { selectCorpus, getCorpora, fetchCorpora } from './index'
 
-describe('switchCorpus', () => {
+describe('selectCorpus', () => {
   it('is a function', () => {
-    expect(switchCorpus).to.be.a('function')
+    expect(selectCorpus).to.be.a('function')
   })
 
-  it('creates an action with type SWITCH_CORPUS', () => {
-    expect(switchCorpus('foo').type).to.equal('SWITCH_CORPUS')
+  it('creates an action with type SELECT_CORPUS', () => {
+    expect(selectCorpus('foo').type).to.equal('SELECT_CORPUS')
   })
 
   it('creates an action with passed argument as newText prop', () => {
-    expect(switchCorpus('foo').corpus).to.equal('foo')
+    expect(selectCorpus('foo').corpus).to.equal('foo')
   })
 })
 

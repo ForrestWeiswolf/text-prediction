@@ -66,14 +66,14 @@ describe('reducer', () => {
     })
   })
 
-  describe('SWITCH_CORPUS action', () => {
+  describe('SELECT_CORPUS action', () => {
     it('returns an object with the new corpus', () => {
       const testState = {
         corpus: 'Copper, Silver, Gold: an Indestructible Metallic Alloy',
       }
       expect(
         reducer(testState, {
-          type: 'SWITCH_CORPUS',
+          type: 'SELECT_CORPUS',
           corpus:
             'Giraffes, Elephants, Baboons: An Equatorial Grasslands Bestiary',
         }).corpus
@@ -90,7 +90,7 @@ describe('reducer', () => {
       }
       expect(
         reducer(testState, {
-          type: 'SWITCH_CORPUS',
+          type: 'SELECT_CORPUS',
           corpus:
             'Giraffes, Elephants, Baboons: An Equatorial Grasslands Bestiary',
         }).otherThing
