@@ -7,7 +7,7 @@ import { expect } from 'chai'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { Provider } from 'react-redux'
-import SuggestionBoxContainer from './SuggestionBoxContainer.jsx'
+import SuggestionContainer from './SuggestionContainer.jsx'
 
 const mock = new MockAdapter(axios)
 const testReply = ['foo', 'bar', 'baz']
@@ -36,8 +36,8 @@ describe('App', () => {
       expect(provider.find(TextInput)).to.have.lengthOf(1)
     })
 
-    it('renders a SuggestionBoxContainer', () => {
-      expect(shallow(<App />).find(SuggestionBoxContainer)).to.have.lengthOf(1)
+    it('renders a SuggestionContainer', () => {
+      expect(shallow(<App />).find(SuggestionContainer)).to.have.lengthOf(1)
     })
   })
 })

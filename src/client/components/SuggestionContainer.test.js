@@ -4,18 +4,18 @@ import { expect } from 'chai'
 import SuggestionBox from './SuggestionBox.jsx'
 import { spy } from 'sinon'
 import { fetchSuggestions } from '../store'
-import { SuggestionBoxContainer } from './SuggestionBoxContainer.jsx'
+import { SuggestionContainer } from './SuggestionContainer.jsx'
 
-describe('SuggestionBoxContainer', () => {
-  let suggestionBoxContainer
+describe('SuggestionContainer', () => {
+  let suggestionContainer
   let fetchSpy
   const testSuggestions = ['foo', 'bar', 'baz']
 
   beforeEach(() => {
     fetchSpy = spy(() => {})
 
-    suggestionBoxContainer = shallow(
-      <SuggestionBoxContainer
+    suggestionContainer = shallow(
+      <SuggestionContainer
         lastWord=""
         selectedCorpus="foo"
         suggestions={testSuggestions}
@@ -25,11 +25,11 @@ describe('SuggestionBoxContainer', () => {
   })
 
   it('Renders three SuggestionBox-es', () => {
-    expect(suggestionBoxContainer.find(SuggestionBox).length).to.equal(3)
+    expect(suggestionContainer.find(SuggestionBox).length).to.equal(3)
   })
 
   it('passes them the values from suggestions prop', () => {
-    const boxes = suggestionBoxContainer.find(SuggestionBox)
+    const boxes = suggestionContainer.find(SuggestionBox)
 
     testSuggestions.forEach((word, idx) => {
       expect(boxes.at(idx).props().value).to.equal(word)
@@ -41,8 +41,8 @@ describe('SuggestionBoxContainer', () => {
   })
 
   it('fetches suggestions based on lastWord and selectedCorpus', () => {
-    suggestionBoxContainer = shallow(
-      <SuggestionBoxContainer
+    suggestionContainer = shallow(
+      <SuggestionContainer
         lastWord="foo"
         selectedCorpus="bar"
         suggestions={testSuggestions}
@@ -54,7 +54,7 @@ describe('SuggestionBoxContainer', () => {
   })
 
   it('fetches suggestions based on new lastWord and selectedCorpus when componentWillReceiveProps', () => {
-    suggestionBoxContainer.setProps({
+    suggestionContainer.setProps({
       lastWord: 'foo',
       selectedCorpus: 'bar',
       suggestions: testSuggestions,
@@ -65,7 +65,7 @@ describe('SuggestionBoxContainer', () => {
   })
 
   it("doesn't fetch suggestions when neither lastWord not selectedCorpus is changed", () => {
-    suggestionBoxContainer.setProps({
+    suggestionContainer.setProps({
       lastWord: 'foo',
       selectedCorpus: 'bar',
       suggestions: testSuggestions,
@@ -74,7 +74,7 @@ describe('SuggestionBoxContainer', () => {
 
     fetchSpy.resetHistory()
 
-    suggestionBoxContainer.setProps({
+    suggestionContainer.setProps({
       lastWord: 'foo',
       selectedCorpus: 'bar',
       suggestions: [],
@@ -87,7 +87,7 @@ describe('SuggestionBoxContainer', () => {
   it("doesn't fetch suggestions when selectedCorpus is falsey", () => {
     fetchSpy.resetHistory()
 
-    suggestionBoxContainer.setProps({
+    suggestionContainer.setProps({
       lastWord: 'foo',
       selectedCorpus: null,
       suggestions: [],

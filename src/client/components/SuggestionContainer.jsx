@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import SuggestionBox from './SuggestionBox.jsx'
 import { fetchSuggestions } from '../store/index.js'
 
-export class SuggestionBoxContainer extends Component {
+export class SuggestionContainer extends Component {
   constructor(props) {
     super()
   }
@@ -40,7 +40,7 @@ export class SuggestionBoxContainer extends Component {
   }
 }
 
-SuggestionBoxContainer.propTypes = {
+SuggestionContainer.propTypes = {
   lastWord: PropTypes.string,
 }
 
@@ -64,4 +64,4 @@ function mapDispatch(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatch
-)(SuggestionBoxContainer)
+)(SuggestionContainer)
