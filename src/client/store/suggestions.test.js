@@ -63,20 +63,6 @@ describe('fetchSuggestions', () => {
       })
     })
 
-    it('does nothing if there is no corpus selected', done => {
-      const dispatchSpy = spy()
-      getStateSpy = spy(() => {
-        return {
-          selectedCorpus: null,
-        }
-      })
-
-      thunk(dispatchSpy, getStateSpy).then(() => {
-        expect(dispatchSpy.called).to.be.false
-        done()
-      })
-    })
-
     it('calls /api/corpus/:corpus', done => {
       thunk(() => {}, getStateSpy).then(() => {
         expect(replySpy.called).to.be.true

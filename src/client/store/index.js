@@ -49,17 +49,9 @@ export function fetchSuggestions(lastWord) {
     const corpus = getState().selectedCorpus
     const wordRoute = lastWord ? lastWord : ''
 
-    if (corpus) {
-      return axios.get(`/api/corpus/${corpus}/` + wordRoute).then(res => {
-        dispatch(updateSuggestions(res.data))
-      })
-    } else {
-      // if there's no corpus selected, do nothing
-      // but return a promise in case this is being .then chained
-      return new Promise((resolve, reject) => {
-        resolve()
-      })
-    }
+    return axios.get(`/api/corpus/${corpus}/` + wordRoute).then(res => {
+      dispatch(updateSuggestions(res.data))
+    })
   }
 }
 
