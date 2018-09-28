@@ -50,7 +50,7 @@ describe('fetchSuggestions', () => {
     beforeEach(() => {
       getStateSpy = spy(() => {
         return {
-          corpus: 'testfile',
+          selectedCorpus: 'testfile',
         }
       })
       thunk = fetchSuggestions()
@@ -67,7 +67,7 @@ describe('fetchSuggestions', () => {
       const dispatchSpy = spy()
       getStateSpy = spy(() => {
         return {
-          corpus: null,
+          selectedCorpus: null,
         }
       })
 

@@ -67,27 +67,25 @@ describe('reducer', () => {
   })
 
   describe('SELECT_CORPUS action', () => {
+    const testState = {
+      selectedCorpus:
+        'Giraffes, Elephants, Baboons: An Equatorial Grasslands Bestiary',
+      otherThing: 12,
+    }
+
     it('returns an object with the new corpus', () => {
-      const testState = {
-        corpus: 'Copper, Silver, Gold: an Indestructible Metallic Alloy',
-      }
       expect(
         reducer(testState, {
           type: 'SELECT_CORPUS',
           corpus:
             'Giraffes, Elephants, Baboons: An Equatorial Grasslands Bestiary',
-        }).corpus
-      ).to.deep.equal(
+        }).selectedCorpus
+      ).to.equal(
         'Giraffes, Elephants, Baboons: An Equatorial Grasslands Bestiary'
       )
     })
 
     it('copies over key/value pairs other than suggestions', () => {
-      const testState = {
-        corpus:
-          'Giraffes, Elephants, Baboons: An Equatorial Grasslands Bestiary',
-        otherThing: 12,
-      }
       expect(
         reducer(testState, {
           type: 'SELECT_CORPUS',
@@ -107,19 +105,19 @@ describe('reducer', () => {
       ).to.deep.equal(['foo'])
     })
 
-    it('if state.corpus was falsey, sets it to the first corpus', () => {
+    it('if state.selectedCorpus was falsey, sets it to the first corpus', () => {
       const testState = { corpora: [] }
       expect(
         reducer(testState, { type: 'GET_CORPORA', corpora: ['foo'] })
-          .corpus
+          .selectedCorpus
       ).to.equal('foo')
     })
 
-    it('if state.corpus was truthy, leaves it unchanged', () => {
-      const testState = { corpora: [], corpus: 'bar' }
+    it('if state.selectedCorpus was truthy, leaves it unchanged', () => {
+      const testState = { corpora: [], selectedCorpus: 'bar' }
       expect(
         reducer(testState, { type: 'GET_CORPORA', corpora: ['foo'] })
-          .corpus
+          .selectedCorpus
       ).to.equal('bar')
     })
 

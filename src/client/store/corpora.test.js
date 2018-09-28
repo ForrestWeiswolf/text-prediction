@@ -13,7 +13,7 @@ describe('selectCorpus', () => {
     expect(selectCorpus('foo').type).to.equal('SELECT_CORPUS')
   })
 
-  it('creates an action with passed argument as newText prop', () => {
+  it('creates an action with passed argument as corpus prop', () => {
     expect(selectCorpus('foo').corpus).to.equal('foo')
   })
 })

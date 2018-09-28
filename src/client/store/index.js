@@ -6,7 +6,7 @@ import axios from 'axios'
 const initialState = {
   text: '',
   suggestions: [],
-  corpus: null,
+  selectedCorpus: null,
   corpora: [],
 }
 
@@ -46,7 +46,7 @@ export function fetchCorpora() {
 
 export function fetchSuggestions(lastWord) {
   return (dispatch, getState) => {
-    const corpus = getState().corpus
+    const corpus = getState().selectedCorpus
     const wordRoute = lastWord ? lastWord : ''
 
     if (corpus) {
@@ -74,11 +74,11 @@ export function reducer(prevState = initialState, action) {
     case UPDATE_SUGGESTIONS:
       return Object.assign({}, prevState, { suggestions: action.suggestions })
     case SELECT_CORPUS:
-      return Object.assign({}, prevState, { corpus: action.corpus })
+      return Object.assign({}, prevState, { selectedCorpus: action.corpus })
     case GET_CORPORA:
       return Object.assign({}, prevState, {
         corpora: action.corpora,
-        corpus: prevState.corpus || action.corpora[0],
+        selectedCorpus: prevState.selectedCorpus || action.corpora[0],
       })
     default:
       return prevState
