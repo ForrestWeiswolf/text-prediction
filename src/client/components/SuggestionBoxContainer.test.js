@@ -17,6 +17,7 @@ describe('SuggestionBoxContainer', () => {
     suggestionBoxContainer = shallow(
       <SuggestionBoxContainer
         lastWord=""
+        selectedCorpus="foo"
         suggestions={testSuggestions}
         fetchSuggestions={fetchSpy}
       />
@@ -39,31 +40,34 @@ describe('SuggestionBoxContainer', () => {
     expect(fetchSpy.called).to.be.true
   })
 
-  it('fetches suggestions based on lastWord', () => {
+  it('fetches suggestions based on lastWord and selectedCorpus', () => {
     suggestionBoxContainer = shallow(
       <SuggestionBoxContainer
         lastWord="foo"
+        selectedCorpus="bar"
         suggestions={testSuggestions}
         fetchSuggestions={fetchSpy}
       />
     )
 
-    expect(fetchSpy.calledWith('foo')).to.be.true
+    expect(fetchSpy.calledWith('foo', 'bar')).to.be.true
   })
 
-  it('fetches suggestions based on new lastWord when componentWillReceiveProps', () => {
+  it('fetches suggestions based on new lastWord and selectedCorpus when componentWillReceiveProps', () => {
     suggestionBoxContainer.setProps({
       lastWord: 'foo',
+      selectedCorpus: 'bar',
       suggestions: testSuggestions,
       fetchSuggestions: fetchSpy,
     })
 
-    expect(fetchSpy.calledWith('foo')).to.be.true
+    expect(fetchSpy.calledWith('foo', 'bar')).to.be.true
   })
 
-  it('doesn\'t fetch suggestions when lastWord isn\'t changed', () => {
+  it("doesn't fetch suggestions when neither lastWord not selectedCorpus is changed", () => {
     suggestionBoxContainer.setProps({
       lastWord: 'foo',
+      selectedCorpus: 'bar',
       suggestions: testSuggestions,
       fetchSuggestions: fetchSpy,
     })
@@ -72,6 +76,7 @@ describe('SuggestionBoxContainer', () => {
 
     suggestionBoxContainer.setProps({
       lastWord: 'foo',
+      selectedCorpus: 'bar',
       suggestions: [],
       fetchSuggestions: fetchSpy,
     })

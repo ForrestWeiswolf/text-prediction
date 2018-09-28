@@ -10,7 +10,7 @@ export class SuggestionBoxContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchSuggestions(this.props.lastWord)
+    this.props.fetchSuggestions(this.props.lastWord, this.props.selectedCorpus)
   }
 
   componentWillReceiveProps(newProps) {
