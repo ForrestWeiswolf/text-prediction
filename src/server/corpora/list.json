@@ -1,11 +1,13 @@
 [
   {
-    "name": "lorem_ipsum",
+    "name": "Lorem Ipsum",
+    "filename": "lorem_ipsum",
     "start": 24,
     "end": null
   }, 
    {
-    "name": "inexorability",
+    "name": "Inexorability of the Specious",
+    "filename": "inexorability",
     "start": 0, 
     "end": 675
    }

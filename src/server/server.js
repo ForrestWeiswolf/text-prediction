@@ -9,7 +9,7 @@ list.forEach(file => {
 })
 
 app.get('/api/corpora', (req, res) => {
-  res.send(list.map(file => file.name))
+  res.send(list.map(file => file.filename))
 })
 
 module.exports = app

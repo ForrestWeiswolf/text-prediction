@@ -20,19 +20,19 @@ function readAndBuildTries(filename, start = 0, end = null, depth, callback) {
 
 function createRoutesFromFile(file, app) {
   readAndBuildTries(
-    `./corpora/${file.name}.txt`,
+    `./corpora/${file.filename}.txt`,
     file.start,
     file.end,
     1,
     trie => {
       console.log(`Loaded ${file.name}`)
 
-      app.use(`/api/corpus/${file.name}/:word`, (req, res) => {
+      app.use(`/api/corpus/${file.filename}/:word`, (req, res) => {
         const nextWords = trie.get(req.params.word)
         res.json(nextWords.slice(0, 3))
       })
 
-      app.use(`/api/corpus/${file.name}`, (req, res) => {
+      app.use(`/api/corpus/${file.filename}`, (req, res) => {
         res.json(trie.get().slice(0, 3))
       })
     }
