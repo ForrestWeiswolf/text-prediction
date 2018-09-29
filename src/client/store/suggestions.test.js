@@ -19,11 +19,6 @@ describe('updateSuggestions', () => {
 })
 
 describe('fetchSuggestions', () => {
-  // Due to some kind of issue with axios-mock-adaptor, these tests fail unless
-  // the tests for fetchCorpora are commented out, and vice-versa.
-  // If run separately, both pass, but they can't be run at the same time
-  // until I find a fix for this.
-
   const testResponse = ['foo', 'bar', 'baz']
   const replySpy = spy(config => {
     return [200, testResponse]

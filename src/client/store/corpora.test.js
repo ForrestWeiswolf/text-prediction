@@ -35,11 +35,6 @@ describe('getCorpora', () => {
 })
 
 describe('fetchCorpora', () => {
-  // Due to some kind of issue with axios-mock-adaptor, these tests fail unless
-  // the tests for fetchSuggestions are commented out, and vice-versa.
-  // If run separately, both pass, but they can't be run at the same time
-  // until I find a fix for this.
-
   const testResponse = [
     { name: 'Foo', route: 'foo' },
     { name: 'bar, baz', route: 'bar_baz' },
