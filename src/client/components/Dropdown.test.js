@@ -9,7 +9,11 @@ describe('Dropdown', () => {
   let dropdown
   beforeEach(() => {
     dropdown = shallow(
-      <Dropdown corpora={testCorpora} fetchCorpora={() => {}} />
+      <Dropdown
+        corpora={testCorpora}
+        fetchCorpora={() => {}}
+        handleChange={() => {}}
+      />
     )
   })
 
@@ -20,7 +24,11 @@ describe('Dropdown', () => {
   it('fetches corpora', () => {
     let fetchSpy = new spy()
     dropdown = shallow(
-      <Dropdown corpora={testCorpora} fetchCorpora={fetchSpy} />
+      <Dropdown
+        corpora={testCorpora}
+        fetchCorpora={fetchSpy}
+        handleChange={() => {}}
+      />
     )
     expect(fetchSpy.called).to.be.true
   })
@@ -35,6 +43,21 @@ describe('Dropdown', () => {
       testCorpora.forEach(c => {
         expect(select.find(`option[value="${c}"]`).length).to.equal(1)
       })
+    })
+
+    it('calls handleChange when changed', () => {
+      const changeSpy = spy()
+      dropdown = shallow(
+        <Dropdown
+          corpora={testCorpora}
+          fetchCorpora={() => {}}
+          handleChange={changeSpy}
+        />
+      )
+
+      select = dropdown.find('select')
+      select.simulate('change', { target: { value: 'bar' } })
+      expect(changeSpy.calledWith('bar')).to.be.true
     })
   })
 })
