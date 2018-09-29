@@ -12,10 +12,10 @@ export class Dropdown extends Component {
     return (
       <div>
         <select onChange={(e) => {this.props.handleChange(e.target.value)}}>
-          {this.props.corpora.map(corpusName => {
+          {this.props.corpora.map((corpus, idx) => {
             return (
-              <option value={corpusName} key={corpusName}>
-                {corpusName}
+              <option value={corpus.route} key={idx}>
+                {corpus.name}
               </option>
             )
           })}
@@ -26,7 +26,7 @@ export class Dropdown extends Component {
 }
 
 Dropdown.propTypes = {
-  corpora: PropTypes.arrayOf(PropTypes.string).isRequired,
+  corpora: PropTypes.arrayOf(PropTypes.object).isRequired,
   fetchCorpora: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired
 }

@@ -100,15 +100,15 @@ describe('reducer', () => {
     it('returns an object with the corpora', () => {
       const testState = { corpora: [] }
       expect(
-        reducer(testState, { type: 'GET_CORPORA', corpora: ['foo'] })
+        reducer(testState, { type: 'GET_CORPORA', corpora: [{ name: 'Foo', route: 'foo' }] })
           .corpora
       ).to.deep.equal(['foo'])
     })
 
-    it('if state.selectedCorpus was falsey, sets it to the first corpus', () => {
+    it('if state.selectedCorpus was falsey, sets it to the first corpus\'s route', () => {
       const testState = { corpora: [] }
       expect(
-        reducer(testState, { type: 'GET_CORPORA', corpora: ['foo'] })
+        reducer(testState, { type: 'GET_CORPORA', corpora: [{ name: 'Foo', route: 'foo' }] })
           .selectedCorpus
       ).to.equal('foo')
     })
@@ -116,15 +116,15 @@ describe('reducer', () => {
     it('if state.selectedCorpus was truthy, leaves it unchanged', () => {
       const testState = { corpora: [], selectedCorpus: 'bar' }
       expect(
-        reducer(testState, { type: 'GET_CORPORA', corpora: ['foo'] })
+        reducer(testState, { type: 'GET_CORPORA', corpora: [{ name: 'Foo', route: 'foo' }] })
           .selectedCorpus
       ).to.equal('bar')
     })
 
-    it('copies over key/value pairs other than suggestions', () => {
+    it('copies over other key/value pairs', () => {
       const testState = { corpora: [], otherThing: 12 }
       expect(
-        reducer(testState, { type: 'GET_CORPORA', corpora: ['foo'] }).otherThing
+        reducer(testState, { type: 'GET_CORPORA', corpora: [{ name: 'Foo', route: 'foo' }] }).otherThing
       ).to.equal(12)
     })
   })

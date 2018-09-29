@@ -70,7 +70,7 @@ export function reducer(prevState = initialState, action) {
     case GET_CORPORA:
       return Object.assign({}, prevState, {
         corpora: action.corpora,
-        selectedCorpus: prevState.selectedCorpus || action.corpora[0],
+        selectedCorpus: prevState.selectedCorpus || action.corpora[0].route,
       })
     default:
       return prevState

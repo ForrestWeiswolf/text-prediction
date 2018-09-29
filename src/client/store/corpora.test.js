@@ -24,11 +24,13 @@ describe('getCorpora', () => {
   })
 
   it('creates an action with type GET_CORPORA', () => {
-    expect(getCorpora('foo').type).to.equal('GET_CORPORA')
+    expect(getCorpora([{ name: 'Foo', route: 'foo' }]).type).to.equal(
+      'GET_CORPORA'
+    )
   })
 
-  it('creates an action with passed argument as newText prop', () => {
-    expect(getCorpora('foo').corpora).to.equal('foo')
+  it('creates an action with passed argument as corpora prop', () => {
+    expect(getCorpora([{ name: 'Foo', route: 'foo' }]).corpora).to.equal('foo')
   })
 })
 
@@ -38,7 +40,11 @@ describe('fetchCorpora', () => {
   // If run separately, both pass, but they can't be run at the same time
   // until I find a fix for this.
 
-  const testResponse = ['foo', 'bar', 'baz']
+  const testResponse = [
+    { name: 'Foo', route: 'foo' },
+    { name: 'bar, baz', route: 'bar_baz' },
+  ]
+
   const replySpy = spy(config => {
     return [200, testResponse]
   })

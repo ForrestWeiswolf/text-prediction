@@ -5,7 +5,11 @@ import { spy } from 'sinon'
 import { Dropdown } from './Dropdown.jsx'
 
 describe('Dropdown', () => {
-  const testCorpora = ['foo', 'bar']
+  const testCorpora = [
+    { name: 'Foo', route: 'foo' },
+    { name: 'bar, baz', route: 'bar_baz' },
+  ]
+
   let dropdown
   beforeEach(() => {
     dropdown = shallow(
@@ -41,7 +45,13 @@ describe('Dropdown', () => {
 
     it('has an option for each corpus passed in props', () => {
       testCorpora.forEach(c => {
-        expect(select.find(`option[value="${c}"]`).length).to.equal(1)
+        expect(select.find(`option[value="${c.route}"]`).length).to.equal(1)
+      })
+    })
+
+    it('each option has the nae of that corpus', () => {
+      testCorpora.forEach(c => {
+        expect(select.find(`option[value="${c.route}"]`).text()).to.equal(c.name)
       })
     })
 
