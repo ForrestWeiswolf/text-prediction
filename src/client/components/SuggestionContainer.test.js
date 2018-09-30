@@ -4,7 +4,7 @@ import { expect } from 'chai'
 import SuggestionBox from './SuggestionBox.jsx'
 import { spy } from 'sinon'
 import { fetchSuggestions } from '../store'
-import { SuggestionContainer } from './SuggestionContainer.jsx'
+import { SuggestionContainer, mapState } from './SuggestionContainer.jsx'
 
 describe('SuggestionContainer', () => {
   let suggestionContainer
@@ -96,5 +96,29 @@ describe('SuggestionContainer', () => {
 
     expect(fetchSpy.called).to.be.false
   })
+})
 
+describe('mapState', () => {
+  const testState = {
+    text: 'Lorem ipusm dolor sit amet',
+    suggestions: ['consectetur'],
+    selectedCorpus: 'lorem_ipsum',
+    corpora: ['lorem_ipsum'],
+  }
+
+  it('returns an object', () => {
+    expect(mapState(testState)).to.be.an('object')
+  })
+
+  it('has suggestions from state', () =>{
+    expect(mapState(testState).suggestions).to.deep.equal(testState.suggestions)
+  })
+
+  it('has selectedCorpus from state', () =>{
+    expect(mapState(testState).selectedCorpus).to.deep.equal(testState.selectedCorpus)
+  })
+
+  it('has last word of text from state as lastWord prop', () =>{
+    expect(mapState(testState).lastWord).to.deep.equal('amet')
+  })
 })

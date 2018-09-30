@@ -44,7 +44,7 @@ SuggestionContainer.propTypes = {
   lastWord: PropTypes.string,
 }
 
-function mapStateToProps(state) {
+export function mapState(state) {
   const words = state.text.split(/\W+/).filter(word => word !== '')
   return {
     lastWord: words[words.length - 1],
@@ -62,6 +62,6 @@ function mapDispatch(dispatch) {
 }
 
 export default connect(
-  mapStateToProps,
+  mapState,
   mapDispatch
 )(SuggestionContainer)
