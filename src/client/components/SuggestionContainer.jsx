@@ -53,7 +53,7 @@ export function mapState(state) {
   }
 }
 
-function mapDispatch(dispatch) {
+export function mapDispatch(dispatch) {
   return {
     fetchSuggestions: (lastWord, selectedCorpus) => {
       dispatch(fetchSuggestions(lastWord, selectedCorpus))

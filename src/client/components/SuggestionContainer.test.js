@@ -4,7 +4,11 @@ import { expect } from 'chai'
 import SuggestionBox from './SuggestionBox.jsx'
 import { spy } from 'sinon'
 import { fetchSuggestions } from '../store'
-import { SuggestionContainer, mapState } from './SuggestionContainer.jsx'
+import {
+  SuggestionContainer,
+  mapState,
+  mapDispatch,
+} from './SuggestionContainer.jsx'
 
 describe('SuggestionContainer', () => {
   let suggestionContainer
@@ -110,15 +114,34 @@ describe('mapState', () => {
     expect(mapState(testState)).to.be.an('object')
   })
 
-  it('has suggestions from state', () =>{
+  it('has suggestions from state', () => {
     expect(mapState(testState).suggestions).to.deep.equal(testState.suggestions)
   })
 
-  it('has selectedCorpus from state', () =>{
-    expect(mapState(testState).selectedCorpus).to.deep.equal(testState.selectedCorpus)
+  it('has selectedCorpus from state', () => {
+    expect(mapState(testState).selectedCorpus).to.deep.equal(
+      testState.selectedCorpus
+    )
   })
 
-  it('has last word of text from state as lastWord prop', () =>{
+  it('has last word of text from state as lastWord prop', () => {
     expect(mapState(testState).lastWord).to.deep.equal('amet')
+  })
+})
+
+describe('mapDispatch', () => {
+  const dispatchSpy = spy()
+
+  it('returns an object', () => {
+    expect(mapDispatch(dispatchSpy)).to.be.an('object')
+  })
+
+  it('has a fetchSuggestions method', () => {
+    expect(mapDispatch(dispatchSpy).fetchSuggestions).to.be.a('function')
+  })
+
+  it("fetchSuggestions method dispatches a fetchSuggestions action with its args", () => {
+    mapDispatch(dispatchSpy).fetchSuggestions()
+    expect(dispatchSpy.called).to.be.true
   })
 })
