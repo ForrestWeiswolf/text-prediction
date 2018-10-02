@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { debounce } from 'lodash'
 import SuggestionBox from './SuggestionBox.jsx'
 import { fetchSuggestions } from '../store/index.js'
 
@@ -54,9 +55,11 @@ export function mapState(state) {
 }
 
 export function mapDispatch(dispatch) {
+  const debouncedDispatch = debounce(dispatch, 200)
+
   return {
     fetchSuggestions: (lastWord, selectedCorpus) => {
-      dispatch(fetchSuggestions(lastWord, selectedCorpus))
+      debouncedDispatch(fetchSuggestions(lastWord, selectedCorpus))
     },
   }
 }

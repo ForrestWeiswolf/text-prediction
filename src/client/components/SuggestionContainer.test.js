@@ -2,7 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 import SuggestionBox from './SuggestionBox.jsx'
-import { spy } from 'sinon'
+import lodash from 'lodash'
+import { spy, stub } from 'sinon'
 import { fetchSuggestions } from '../store'
 import {
   SuggestionContainer,
@@ -130,7 +131,14 @@ describe('mapState', () => {
 })
 
 describe('mapDispatch', () => {
-  const dispatchSpy = spy()
+  let dispatchSpy = spy()
+  const debounceStub = stub(lodash, 'debounce')
+  debounceStub.returnsArg(0)
+  debounceStub.isAStub = true
+
+  afterEach(() => {
+    debounceStub.resetHistory()
+  })
 
   it('returns an object', () => {
     expect(mapDispatch(dispatchSpy)).to.be.an('object')
@@ -140,8 +148,15 @@ describe('mapDispatch', () => {
     expect(mapDispatch(dispatchSpy).fetchSuggestions).to.be.a('function')
   })
 
-  it("fetchSuggestions method dispatches a fetchSuggestions action with its args", () => {
-    mapDispatch(dispatchSpy).fetchSuggestions()
-    expect(dispatchSpy.called).to.be.true
+  describe('fetchSuggestions method', () => {
+    it('dispatches a fetchSuggestions action with its args', () => {
+      mapDispatch(dispatchSpy).fetchSuggestions('foo', 'bar')
+      expect(dispatchSpy.called).to.be.true
+    })
+
+    it('is debounced to 200ms', () => {
+      mapDispatch(dispatchSpy)
+      expect(debounceStub.called).to.be.true
+    })
   })
 })
