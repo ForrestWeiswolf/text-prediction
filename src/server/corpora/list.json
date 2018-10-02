@@ -1,14 +1,20 @@
 [
   {
-    "name": "Lorem Ipsum",
-    "filename": "lorem_ipsum",
-    "start": 24,
-    "end": null
-  }, 
-   {
-    "name": "Inexorability of the Specious",
-    "filename": "inexorability",
-    "start": 0, 
-    "end": 675
-   }
+    "name": "Pride and Prejudice",
+    "filename": "pride_and_prejudice",
+    "start": 664,
+    "end": 685410
+  },
+  {
+    "name": "Beowulf",
+    "filename": "beowulf",
+    "start": 31337,
+    "end": 270925
+  },
+  {
+    "name": "Frankenstein; or, the Modern Prometheus",
+    "filename": "frankenstein",
+    "start": 1186,
+    "end": 421829
+  }
 ]
