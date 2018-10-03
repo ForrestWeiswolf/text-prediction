@@ -11,7 +11,6 @@ function readAndBuildTries(filename, start = 0, end = null, depth, callback) {
         throw err
       } else {
         const text = data.slice(start, end || data.length)
-        console.log(data.slice(end || data.length - 100, end || data.length))
         const tries = new WordTries(text, depth)
         callback(tries)
       }
