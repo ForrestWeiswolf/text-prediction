@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetchCorpora, selectCorpus } from '../store/index.js'
+import './Dropdown.css'
 
 export class Dropdown extends Component {
 	componentWillMount(){
@@ -10,7 +11,7 @@ export class Dropdown extends Component {
 
   render() {
     return (
-      <div>
+      <div className="dropdown">
         <select onChange={(e) => {this.props.handleChange(e.target.value)}}>
           {this.props.corpora.map((corpus, idx) => {
             return (
