@@ -30,7 +30,8 @@ describe('getCorpora', () => {
   })
 
   it('creates an action with passed argument as corpora prop', () => {
-    expect(getCorpora([{ name: 'Foo', route: 'foo' }]).corpora).to.equal('foo')
+    const testCorpus = { name: 'Foo', route: 'foo' }
+    expect(getCorpora([testCorpus]).corpora).to.deep.equal([testCorpus])
   })
 })
 
