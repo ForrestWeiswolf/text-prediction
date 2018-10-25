@@ -10,28 +10,25 @@ async function readAndBuildTries(filename, start = 0, end = null, depth) {
     encoding: 'utf-8',
   })
 
-  const tries = new WordTries(file.slice(start, end || file.length), depth)
+  const tries = new WordTries(file.slice(start, end || data.length), depth)
   return tries
 }
 
 async function createRoutesFromFile(file, app) {
   const tries = await readAndBuildTries(
     `./corpora/${file.filename}.txt`,
-    31337,
-    270920,
-    2
+    file.start,
+    file.end,
+    1
   )
 
-  app.use(`/api/corpus/${file.filename}/`, (req, res) => {
-    let lastWords
-    try {
-      lastWords = req.query.words ? JSON.parse(req.query.words) : []
-      const nextWords = tries.get(...lastWords)
-      res.json(nextWords.slice(0, 3))
-    } catch (error) {
-      console.error(error)
-      res.end()
-    }
+  app.use(`/api/corpus/${file.filename}/:word`, (req, res) => {
+    const nextWords = tries.get(req.params.word)
+    res.json(nextWords.slice(0, 3))
+  })
+
+  app.use(`/api/corpus/${file.filename}`, (req, res) => {
+    res.json(tries.get().slice(0, 3))
   })
 }
 
