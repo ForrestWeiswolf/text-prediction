@@ -36,7 +36,7 @@ describe('fetchSuggestions', () => {
   })
 
   it('returns a function', () => {
-    expect(fetchSuggestions()).to.be.a('function')
+    expect(fetchSuggestions([])).to.be.a('function')
   })
 
   describe('returned thunk', () => {
@@ -48,7 +48,7 @@ describe('fetchSuggestions', () => {
           selectedCorpus: 'testfile',
         }
       })
-      thunk = fetchSuggestions()
+      thunk = fetchSuggestions([])
     })
 
     it('gets corpus name from store', done => {
@@ -72,7 +72,7 @@ describe('fetchSuggestions', () => {
 
       mock.onGet(/\/api\/corpus\/testfile\/foo\/?/).reply(fooReplySpy)
 
-      thunk = fetchSuggestions('foo')
+      thunk = fetchSuggestions(['foo'])
 
       thunk(() => {}, getStateSpy).then(() => {
         expect(fooReplySpy.called).to.be.true

@@ -55,7 +55,7 @@ describe('SuggestionContainer', () => {
       />
     )
 
-    expect(fetchSpy.calledWith('foo')).to.be.true
+    expect(fetchSpy.calledWith(['foo'])).to.be.true
   })
 
   it('fetches suggestions based on new lastWord and selectedCorpus when componentWillReceiveProps', () => {
@@ -66,7 +66,7 @@ describe('SuggestionContainer', () => {
       fetchSuggestions: fetchSpy,
     })
 
-    expect(fetchSpy.calledWith('foo')).to.be.true
+    expect(fetchSpy.calledWith(['foo'])).to.be.true
   })
 
   it("doesn't fetch suggestions when neither lastWord not selectedCorpus is changed", () => {
@@ -149,7 +149,7 @@ describe('mapDispatch', () => {
   })
 
   describe('fetchSuggestions method', () => {
-    it('dispatches a fetchSuggestions action with its args', () => {
+    it('dispatches a fetchSuggestions action with array of its args', () => {
       mapDispatch(dispatchSpy).fetchSuggestions('foo')
       expect(dispatchSpy.called).to.be.true
     })

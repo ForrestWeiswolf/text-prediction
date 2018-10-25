@@ -12,7 +12,7 @@ export class SuggestionContainer extends Component {
 
   componentDidMount() {
     if (this.props.selectedCorpus) {
-      this.props.fetchSuggestions(this.props.lastWord)
+      this.props.fetchSuggestions([this.props.lastWord])
     }
   }
 
@@ -21,7 +21,7 @@ export class SuggestionContainer extends Component {
     const changedCorpus = newProps.selectedCorpus !== this.props.selectedCorpus
 
     if (newProps.selectedCorpus && (changedWord || changedCorpus)) {
-      this.props.fetchSuggestions(newProps.lastWord)
+      this.props.fetchSuggestions([newProps.lastWord])
     }
   }
 
@@ -56,7 +56,7 @@ export function mapDispatch(dispatch) {
 
   return {
     fetchSuggestions: (lastWord, selectedCorpus) => {
-      debouncedDispatch(fetchSuggestions(lastWord))
+      debouncedDispatch(fetchSuggestions([lastWord]))
     },
   }
 }

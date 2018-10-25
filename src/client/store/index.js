@@ -44,10 +44,10 @@ export function fetchCorpora() {
   }
 }
 
-export function fetchSuggestions(lastWord) {
+export function fetchSuggestions(lastWords) {
   return (dispatch, getState) => {
     const corpus = getState().selectedCorpus
-    const wordRoute = lastWord ? lastWord : ''
+    const wordRoute = (lastWords && lastWords[0]) ? lastWords[0] : ''
 
     return axios.get(`/api/corpus/${corpus}/` + wordRoute).then(res => {
       dispatch(updateSuggestions(res.data))
