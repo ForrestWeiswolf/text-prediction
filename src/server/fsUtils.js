@@ -10,11 +10,14 @@ async function readAndBuildTries(filename, start = 0, end = null, depth) {
     encoding: 'utf-8',
   })
 
+  console.log('creating tries')
   const tries = new WordTries(file.slice(start, end || file.length), depth)
+  console.log(`loaded ${filename}`)
   return tries
 }
 
 async function createRoutesFromFile(file, app) {
+  console.log('creating routes from', file.name)
   const tries = await readAndBuildTries(
     `./corpora/${file.filename}.txt`,
     file.start,
