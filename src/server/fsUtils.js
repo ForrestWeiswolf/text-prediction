@@ -17,8 +17,8 @@ async function readAndBuildTries(filename, start = 0, end = null, depth) {
 async function createRoutesFromFile(file, app) {
   const tries = await readAndBuildTries(
     `./corpora/${file.filename}.txt`,
-    31337,
-    270920,
+    file.start,
+    file.end,
     2
   )
 
