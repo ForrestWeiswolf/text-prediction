@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { debounce } from 'lodash'
+import { debounce, isEqual } from 'lodash'
 import SuggestionBox from './SuggestionBox.jsx'
 import { fetchSuggestions } from '../store/index.js'
 
@@ -12,16 +12,16 @@ export class SuggestionContainer extends Component {
 
   componentDidMount() {
     if (this.props.selectedCorpus) {
-      this.props.fetchSuggestions([this.props.lastWord])
+      this.props.fetchSuggestions(this.props.lastWords)
     }
   }
 
   componentWillReceiveProps(newProps) {
-    const changedWord = newProps.lastWord !== this.props.lastWord
+    const changedWords = !isEqual(newProps.lastWords,this.props.lastWords)
     const changedCorpus = newProps.selectedCorpus !== this.props.selectedCorpus
 
-    if (newProps.selectedCorpus && (changedWord || changedCorpus)) {
-      this.props.fetchSuggestions([newProps.lastWord])
+    if (newProps.selectedCorpus && (changedWords || changedCorpus)) {
+      this.props.fetchSuggestions(newProps.lastWords)
     }
   }
 
@@ -30,7 +30,8 @@ export class SuggestionContainer extends Component {
 
     return (
       <div>
-        {suggestions.map((suggestion, idx) => (
+        {!suggestions.map && console.log(suggestions)}
+        {suggestions && suggestions.map((suggestion, idx) => (
           <SuggestionBox value={suggestion} key={idx} />
         ))}
       </div>
@@ -39,13 +40,13 @@ export class SuggestionContainer extends Component {
 }
 
 SuggestionContainer.propTypes = {
-  lastWord: PropTypes.string,
+  lastWords: PropTypes.arrayOf(PropTypes.string),
 }
 
 export function mapState(state) {
   const words = state.text.split(/\W+/).filter(word => word !== '')
   return {
-    lastWord: words[words.length - 1],
+    lastWords: words.slice(Math.max(0, words.length - 2)),
     suggestions: state.suggestions,
     selectedCorpus: state.selectedCorpus,
   }
@@ -55,8 +56,9 @@ export function mapDispatch(dispatch) {
   const debouncedDispatch = debounce(dispatch, 200)
 
   return {
-    fetchSuggestions: (lastWord, selectedCorpus) => {
-      debouncedDispatch(fetchSuggestions([lastWord]))
+    fetchSuggestions: (lastWords, selectedCorpus) => {
+      console.log(lastWords)
+      debouncedDispatch(fetchSuggestions(lastWords))
     },
   }
 }
