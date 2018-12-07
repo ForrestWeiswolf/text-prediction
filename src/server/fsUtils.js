@@ -28,8 +28,13 @@ async function createRoutesFromFile(file, app) {
   app.use(`/api/corpus/${file.filename}/`, (req, res) => {
     let lastWords
     try {
+      // http://localhost:8080/api/corpus/beowulf?words=[%22if%22,%22this%22]
       lastWords = req.query.words ? JSON.parse(req.query.words) : []
-      const nextWords = tries.get(...lastWords)
+      console.log(lastWords)
+      let nextWords = tries.get(...lastWords)
+      if(nextWords.length === 0){
+        nextWords = tries.get(lastWords[lastWords.length - 1])
+      }
       res.json(nextWords.slice(0, 3))
     } catch (error) {
       console.error(error)
