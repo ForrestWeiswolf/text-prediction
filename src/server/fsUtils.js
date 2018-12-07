@@ -31,6 +31,7 @@ async function createRoutesFromFile(file, app) {
       // http://localhost:8080/api/corpus/beowulf?words=[%22if%22,%22this%22]
       lastWords = req.query.words ? JSON.parse(req.query.words) : []
       console.log(lastWords)
+      lastWords = lastWords.map(w => w.toLowerCase())
       let nextWords = tries.get(...lastWords)
       if(nextWords.length === 0){
         nextWords = tries.get(lastWords[lastWords.length - 1])
