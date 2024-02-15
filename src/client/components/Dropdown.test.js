@@ -65,7 +65,7 @@ describe('Dropdown', () => {
 
       select = dropdown.find('select')
       select.simulate('change', { target: { value: 'bar' } })
-      expect(changeSpy).toBeCalledWith(true)
+      expect(changeSpy).toBeCalledWith('bar')
     })
   })
 })

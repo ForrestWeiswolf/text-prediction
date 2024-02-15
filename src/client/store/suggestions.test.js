@@ -72,10 +72,10 @@ describe('fetchSuggestions', () => {
 
     it('dispatches a UPDATE_SUGGESTIONS with the response', done => {
       const dispatchSpy = jest.fn()
+
       thunk(dispatchSpy, getStateSpy).then(() => {
-        expect(dispatchSpy.lastCall.args[0]).toEqual(
-          updateSuggestions(testResponse)
-        )
+        const lastCall = dispatchSpy.calls[dispatchSpy.calls.length - 1]
+        expect(lastCall[0]).toEqual(updateSuggestions(testResponse))
         done()
       })
     })

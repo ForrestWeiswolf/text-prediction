@@ -75,7 +75,7 @@ describe('SuggestionContainer', () => {
       fetchSuggestions: fetchSpy,
     })
 
-    fetchSpy.resetHistory()
+    fetchSpy.mockClear()
 
     suggestionContainer.setProps({
       lastWord: 'foo',
@@ -84,11 +84,11 @@ describe('SuggestionContainer', () => {
       fetchSuggestions: fetchSpy,
     })
 
-    expect(fetchSpy.called).toBe(false)
+    expect(fetchSpy).not.toBeCalled()
   })
 
   it("doesn't fetch suggestions when selectedCorpus is falsey", () => {
-    fetchSpy.resetHistory()
+    fetchSpy.mockClear()
 
     suggestionContainer.setProps({
       lastWord: 'foo',
@@ -97,7 +97,7 @@ describe('SuggestionContainer', () => {
       fetchSuggestions: fetchSpy,
     })
 
-    expect(fetchSpy.called).toBe(false)
+    expect(fetchSpy).not.toBeCalled()
   })
 })
 
