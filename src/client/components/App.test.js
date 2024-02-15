@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import TextInput from './TextInput.jsx'
 import { shallow, mount } from 'enzyme'
-import { expect } from 'chai'
+
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { Provider } from 'react-redux'
@@ -21,7 +21,7 @@ describe('App', () => {
   })
 
   it('renders a Provider', () => {
-    expect(shallow(<App />).find('Provider')).to.have.lengthOf(1)
+    expect(shallow(<App />).find('Provider')).toHaveLength(1)
   })
 
   describe('provider', () => {
@@ -33,11 +33,11 @@ describe('App', () => {
     })
 
     it('renders a TextInput', () => {
-      expect(provider.find(TextInput)).to.have.lengthOf(1)
+      expect(provider.find(TextInput)).toHaveLength(1)
     })
 
     it('renders a SuggestionContainer', () => {
-      expect(shallow(<App />).find(SuggestionContainer)).to.have.lengthOf(1)
+      expect(shallow(<App />).find(SuggestionContainer)).toHaveLength(1)
     })
   })
 })

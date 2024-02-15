@@ -1,26 +1,20 @@
-import { expect } from 'chai'
 import axios from 'axios'
-import { spy } from 'sinon'
 import MockAdapter from 'axios-mock-adapter'
 import { updateSuggestions, fetchSuggestions } from './index'
 
 describe('updateSuggestions', () => {
-  it('is a function', () => {
-    expect(updateSuggestions).to.be.a('function')
-  })
-
   it('creates an action with type UPDATE_SUGGESTIONS', () => {
-    expect(updateSuggestions('foo').type).to.equal('UPDATE_SUGGESTIONS')
+    expect(updateSuggestions('foo').type).toEqual('UPDATE_SUGGESTIONS')
   })
 
   it('creates an action with passed argument as suggestions prop', () => {
-    expect(updateSuggestions('foo').suggestions).to.equal('foo')
+    expect(updateSuggestions('foo').suggestions).toEqual('foo')
   })
 })
 
 describe('fetchSuggestions', () => {
   const testResponse = ['foo', 'bar', 'baz']
-  const replySpy = spy(config => {
+  const replySpy = jest.fn(config => {
     return [200, testResponse]
   })
 
@@ -31,19 +25,15 @@ describe('fetchSuggestions', () => {
     mock.restore()
   })
 
-  it('is a function', () => {
-    expect(fetchSuggestions).to.be.a('function')
-  })
-
   it('returns a function', () => {
-    expect(fetchSuggestions()).to.be.a('function')
+    expect(typeof fetchSuggestions()).toBe('function')
   })
 
   describe('returned thunk', () => {
     let thunk
     let getStateSpy
     beforeEach(() => {
-      getStateSpy = spy(() => {
+      getStateSpy = jest.fn(() => {
         return {
           selectedCorpus: 'testfile',
         }
@@ -53,20 +43,20 @@ describe('fetchSuggestions', () => {
 
     it('gets corpus name from store', done => {
       thunk(() => {}, getStateSpy).then(() => {
-        expect(getStateSpy.called).to.be.true
+        expect(getStateSpy).toBeCalled()
         done()
       })
     })
 
     it('calls /api/corpus/:corpus', done => {
       thunk(() => {}, getStateSpy).then(() => {
-        expect(replySpy.called).to.be.true
+        expect(replySpy).toBeCalled()
         done()
       })
     })
 
     it('calls /api/corpus/:corpus/:word if fetchSuggestions was passed a word', done => {
-      const fooReplySpy = spy(config => {
+      const fooReplySpy = jest.fn(config => {
         return [200, testResponse]
       })
 
@@ -75,15 +65,15 @@ describe('fetchSuggestions', () => {
       thunk = fetchSuggestions('foo')
 
       thunk(() => {}, getStateSpy).then(() => {
-        expect(fooReplySpy.called).to.be.true
+        expect(fooReplySpy).toBeCalled()
         done()
       })
     })
 
     it('dispatches a UPDATE_SUGGESTIONS with the response', done => {
-      const dispatchSpy = spy()
+      const dispatchSpy = jest.fn()
       thunk(dispatchSpy, getStateSpy).then(() => {
-        expect(dispatchSpy.lastCall.args[0]).to.deep.equal(
+        expect(dispatchSpy.lastCall.args[0]).toEqual(
           updateSuggestions(testResponse)
         )
         done()

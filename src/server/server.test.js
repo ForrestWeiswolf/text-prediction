@@ -17,7 +17,7 @@ xdescribe('server', () => {
       })
 
       promise.then(res => {
-        expect(res).to.equal('bar')
+        expect(res).toEqual('bar')
       })
     })
 
@@ -32,7 +32,7 @@ xdescribe('server', () => {
       })
 
       promise.then(res => {
-        expect(res).to.equal('foo')
+        expect(res).toEqual('foo')
       })
     })
 
