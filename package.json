@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^1.6.7",
     "build-word-tries": "../build-word-tries",
     "express": "^4.16.3",
     "lodash.debounce": "^4.0.8",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
+    "react": "^16.0.0",
+    "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
-    "react-scripts": "1.1.5",
+    "react-scripts": "5.0.1",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0"
@@ -23,6 +23,7 @@
   },
   "proxy": "http://localhost:8080",
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "axios-mock-adapter": "^1.15.0",
     "chai": "^4.1.2",
     "concurrently": "^4.0.1",
@@ -31,5 +32,17 @@
     "nodemon": "^1.18.4",
     "sinon": "^6.3.4",
     "supertest": "^3.3.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
