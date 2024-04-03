@@ -5,13 +5,13 @@ import TextInput from './TextInput.jsx'
 import { shallow, mount } from 'enzyme'
 
 import axios from 'axios'
-import MockAdapter from 'axios-mock-adapter'
 import { Provider } from 'react-redux'
 import SuggestionContainer from './SuggestionContainer.jsx'
 
-const mock = new MockAdapter(axios)
+jest.mock('axios')
+
 const testReply = ['foo', 'bar', 'baz']
-mock.onGet(/\/api(\/w+)*/).reply(200, testReply)
+mock.onGet().reply(200, testReply)
 
 describe('App', () => {
   it('renders without crashing', () => {
@@ -28,6 +28,14 @@ describe('App', () => {
     let provider
     let app
     beforeEach(() => {
+      axios.get.mockImplementation((url) => {
+        if (/\/api(\/w+)*/.test(url)) {
+          Promise.resolve({ status: 200, data: testResponse })
+        } else {
+          Promise.reject({ status: 404 })
+        }
+      })
+
       app = mount(<App />)
       provider = app.find(Provider).first()
     })
