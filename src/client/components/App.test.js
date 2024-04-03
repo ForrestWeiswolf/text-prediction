@@ -10,10 +10,19 @@ import SuggestionContainer from './SuggestionContainer.jsx'
 
 jest.mock('axios')
 
-const testReply = ['foo', 'bar', 'baz']
-mock.onGet().reply(200, testReply)
+const testResponse = ['foo', 'bar', 'baz']
 
 describe('App', () => {
+  beforeEach(() => {
+    axios.get.mockImplementation((url) => {
+      if (/\/api(\/w+)*/.test(url)) {
+        return Promise.resolve({ status: 200, data: testResponse })
+      } else {
+        return Promise.reject({ status: 404 })
+      }
+    })
+  })
+
   it('renders without crashing', () => {
     const div = document.createElement('div')
     ReactDOM.render(<App />, div)
@@ -28,14 +37,6 @@ describe('App', () => {
     let provider
     let app
     beforeEach(() => {
-      axios.get.mockImplementation((url) => {
-        if (/\/api(\/w+)*/.test(url)) {
-          Promise.resolve({ status: 200, data: testResponse })
-        } else {
-          Promise.reject({ status: 404 })
-        }
-      })
-
       app = mount(<App />)
       provider = app.find(Provider).first()
     })
