@@ -1,5 +1,5 @@
 import axios from 'axios'
-import MockAdapter from 'axios-mock-adapter'
+jest.mock('axios')
 import { updateSuggestions, fetchSuggestions } from './index'
 
 describe('updateSuggestions', () => {
@@ -14,16 +14,6 @@ describe('updateSuggestions', () => {
 
 describe('fetchSuggestions', () => {
   const testResponse = ['foo', 'bar', 'baz']
-  const replySpy = jest.fn(config => {
-    return [200, testResponse]
-  })
-
-  const mock = new MockAdapter(axios)
-  mock.onGet('/api/corpus/testfile/').reply(replySpy)
-
-  afterAll(() => {
-    mock.restore()
-  })
 
   it('returns a function', () => {
     expect(typeof fetchSuggestions()).toBe('function')
@@ -38,44 +28,33 @@ describe('fetchSuggestions', () => {
           selectedCorpus: 'testfile',
         }
       })
+
+      axios.get.mockImplementation(() => Promise.resolve({ statius: 200, data: testResponse }))
+
       thunk = fetchSuggestions()
     })
 
-    it('gets corpus name from store', done => {
-      thunk(() => {}, getStateSpy).then(() => {
-        expect(getStateSpy).toBeCalled()
-        done()
+    it('calls /api/corpus/:corpus, with the corpus name from store', done => {
+      thunk(() => { }, getStateSpy).then(() => {
+        expect(axios.get).toBeCalledWith('/api/corpus/testfile/')
       })
-    })
-
-    it('calls /api/corpus/:corpus', done => {
-      thunk(() => {}, getStateSpy).then(() => {
-        expect(replySpy).toBeCalled()
-        done()
-      })
+      done()
     })
 
     it('calls /api/corpus/:corpus/:word if fetchSuggestions was passed a word', done => {
-      const fooReplySpy = jest.fn(config => {
-        return [200, testResponse]
-      })
-
-      mock.onGet(/\/api\/corpus\/testfile\/foo\/?/).reply(fooReplySpy)
-
       thunk = fetchSuggestions('foo')
 
-      thunk(() => {}, getStateSpy).then(() => {
-        expect(fooReplySpy).toBeCalled()
-        done()
+      thunk(() => { }, getStateSpy).then(() => {
+        expect(axios.get).toBeCalledWith('/api/corpus/testfile/foo')
       })
+      done()
     })
 
     it('dispatches a UPDATE_SUGGESTIONS with the response', done => {
       const dispatchSpy = jest.fn()
 
       thunk(dispatchSpy, getStateSpy).then(() => {
-        const lastCall = dispatchSpy.calls[dispatchSpy.calls.length - 1]
-        expect(lastCall[0]).toEqual(updateSuggestions(testResponse))
+        expect(dispatchSpy).toBeCalledWith(updateSuggestions(testResponse))
         done()
       })
     })
