@@ -1,6 +1,7 @@
 import axios from 'axios'
-jest.mock('axios')
 import { updateSuggestions, fetchSuggestions } from './index'
+
+jest.mock('axios')
 
 describe('updateSuggestions', () => {
   it('creates an action with type UPDATE_SUGGESTIONS', () => {
@@ -29,7 +30,7 @@ describe('fetchSuggestions', () => {
         }
       })
 
-      axios.get.mockImplementation(() => Promise.resolve({ statius: 200, data: testResponse }))
+      axios.get.mockImplementation(() => Promise.resolve({ status: 200, data: testResponse }))
 
       thunk = fetchSuggestions()
     })

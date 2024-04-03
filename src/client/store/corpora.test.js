@@ -1,6 +1,7 @@
 import axios from 'axios'
-import MockAdapter from 'axios-mock-adapter'
 import { selectCorpus, getCorpora, fetchCorpora } from './index'
+
+jest.mock('axios')
 
 describe('selectCorpus', () => {
   it('creates an action with type SELECT_CORPUS', () => {
@@ -31,17 +32,6 @@ describe('fetchCorpora', () => {
     { name: 'bar, baz', route: 'bar_baz' },
   ]
 
-  const replySpy = jest.fn(config => {
-    return [200, testResponse]
-  })
-
-  const mock = new MockAdapter(axios)
-  mock.onGet('/api/corpora/').reply(replySpy)
-
-  afterAll(() => {
-    mock.restore()
-  })
-
   it('returns a function', () => {
     expect(typeof fetchCorpora()).toBe('function')
   })
@@ -49,12 +39,14 @@ describe('fetchCorpora', () => {
   describe('returned thunk', () => {
     let thunk
     beforeEach(() => {
+      axios.get.mockImplementation(() => Promise.resolve({ status: 200, data: testResponse }))
+
       thunk = fetchCorpora()
     })
 
     it('calls /api/corpora', done => {
-      thunk(() => {}).then(() => {
-        expect(replySpy).toBeCalled()
+      thunk(() => { }).then(() => {
+        expect(axios.get).toBeCalledWith('/api/corpora/')
         done()
       })
     })
@@ -62,9 +54,7 @@ describe('fetchCorpora', () => {
     it('dispatches a GET_CORPORA with the response', done => {
       const dispatchSpy = jest.fn()
       thunk(dispatchSpy).then(() => {
-        expect(dispatchSpy.lastCall.args[0]).toEqual(
-          getCorpora(testResponse)
-        )
+        expect(dispatchSpy).toBeCalledWith(getCorpora(testResponse))
         done()
       })
     })
