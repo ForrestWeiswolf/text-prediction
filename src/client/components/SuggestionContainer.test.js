@@ -56,7 +56,7 @@ describe('SuggestionContainer', () => {
     expect(fetchSpy).toBeCalledWith('foo', 'bar')
   })
 
-  it('fetches suggestions based on new lastWord and selectedCorpus when componentWillReceiveProps', () => {
+  it('fetches suggestions based on new lastWord and selectedCorpus', () => {
     suggestionContainer.setProps({
       lastWord: 'foo',
       selectedCorpus: 'bar',

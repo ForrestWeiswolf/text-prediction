@@ -19,12 +19,12 @@ export class SuggestionContainer extends Component {
     }
   }
 
-  componentWillReceiveProps(newProps) {
-    const changedWord = newProps.lastWord !== this.props.lastWord
-    const changedCorpus = newProps.selectedCorpus !== this.props.selectedCorpus
+  componentDidUpdate(prevProps) {
+    const changedWord = prevProps.lastWord !== this.props.lastWord
+    const changedCorpus = prevProps.selectedCorpus !== this.props.selectedCorpus
 
-    if (newProps.selectedCorpus && (changedWord || changedCorpus)) {
-      this.props.fetchSuggestions(newProps.lastWord, newProps.selectedCorpus)
+    if (this.props.selectedCorpus && (changedWord || changedCorpus)) {
+      this.props.fetchSuggestions(this.props.lastWord, this.props.selectedCorpus)
     }
   }
 
