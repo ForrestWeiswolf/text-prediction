@@ -106,7 +106,7 @@ describe('mapState', () => {
     text: 'Lorem ipusm dolor sit amet',
     suggestions: ['consectetur'],
     selectedCorpus: 'lorem_ipsum',
-    corpora: ['lorem_ipsum'],
+    corpora: [{name: 'lorem_ipsum', route: '/lorem_ipsum'}],
   }
 
   it('has suggestions from state', () => {

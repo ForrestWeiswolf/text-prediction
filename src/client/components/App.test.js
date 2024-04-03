@@ -10,7 +10,7 @@ import SuggestionContainer from './SuggestionContainer.jsx'
 
 jest.mock('axios')
 
-const testResponse = ['foo', 'bar', 'baz']
+const testResponse = [{name: 'foo', route: 'foo'}, {name: 'bar', route: 'bar'}, {name: 'baz', route: 'baz'}]
 
 describe('App', () => {
   beforeEach(() => {
