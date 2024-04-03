@@ -1,17 +1,13 @@
-import { expect } from 'chai'
+
 import { reducer } from './index'
 
 describe('reducer', () => {
-  it('is a function', () => {
-    expect(reducer).to.be.a('function')
-  })
-
   describe('when called with a state and a nonexistent action', () => {
     it('returns the state unchanged', () => {
       const testState = { text: 'bar baz' }
       expect(
         reducer(testState, { type: 'NOTHING', data: 'not a real action' })
-      ).to.equal(testState)
+      ).toEqual(testState)
     })
   })
 
@@ -20,7 +16,7 @@ describe('reducer', () => {
       const testState = { text: 'bar baz' }
       expect(
         reducer(testState, { type: 'UPDATE_TEXT', newText: 'new string' }).text
-      ).to.equal('new string')
+      ).toEqual('new string')
     })
 
     it('copies over key/value pairs other than text unchanged', () => {
@@ -28,7 +24,7 @@ describe('reducer', () => {
       expect(
         reducer(testState, { type: 'UPDATE_TEXT', newText: 'new string' })
           .otherThing
-      ).to.equal(12)
+      ).toEqual(12)
     })
   })
 
@@ -37,14 +33,14 @@ describe('reducer', () => {
       const testState = { text: 'bar baz' }
       expect(
         reducer(testState, { type: 'ADD_TO_TEXT', newText: ' foo' }).text
-      ).to.equal('bar baz foo')
+      ).toEqual('bar baz foo')
     })
 
     it('copies over key/value pairs other than text unchanged', () => {
       const testState = { text: 'bar baz', otherThing: 12 }
       expect(
         reducer(testState, { type: 'ADD_TO_TEXT', newText: ' foo' }).otherThing
-      ).to.equal(12)
+      ).toEqual(12)
     })
   })
 
@@ -54,7 +50,7 @@ describe('reducer', () => {
       expect(
         reducer(testState, { type: 'UPDATE_SUGGESTIONS', suggestions: ['foo'] })
           .suggestions
-      ).to.deep.equal(['foo'])
+      ).toEqual(['foo'])
     })
 
     it('copies over key/value pairs other than suggestions', () => {
@@ -62,7 +58,7 @@ describe('reducer', () => {
       expect(
         reducer(testState, { type: 'UPDATE_SUGGESTIONS', suggestions: ['foo'] })
           .otherThing
-      ).to.equal(12)
+      ).toEqual(12)
     })
   })
 
@@ -80,7 +76,7 @@ describe('reducer', () => {
           corpus:
             'Giraffes, Elephants, Baboons: An Equatorial Grasslands Bestiary',
         }).selectedCorpus
-      ).to.equal(
+      ).toEqual(
         'Giraffes, Elephants, Baboons: An Equatorial Grasslands Bestiary'
       )
     })
@@ -92,7 +88,7 @@ describe('reducer', () => {
           corpus:
             'Giraffes, Elephants, Baboons: An Equatorial Grasslands Bestiary',
         }).otherThing
-      ).to.equal(12)
+      ).toEqual(12)
     })
   })
 
@@ -103,7 +99,7 @@ describe('reducer', () => {
       expect(
         reducer(testState, { type: 'GET_CORPORA', corpora: [testCorpus] })
           .corpora
-      ).to.deep.equal([testCorpus])
+      ).toEqual([testCorpus])
     })
 
     it("if state.selectedCorpus was falsey, sets it to the first corpus's route", () => {
@@ -113,7 +109,7 @@ describe('reducer', () => {
           type: 'GET_CORPORA',
           corpora: [{ name: 'Foo', route: 'foo' }],
         }).selectedCorpus
-      ).to.equal('foo')
+      ).toEqual('foo')
     })
 
     it('if state.selectedCorpus was truthy, leaves it unchanged', () => {
@@ -123,7 +119,7 @@ describe('reducer', () => {
           type: 'GET_CORPORA',
           corpora: [{ name: 'Foo', route: 'foo' }],
         }).selectedCorpus
-      ).to.equal('bar')
+      ).toEqual('bar')
     })
 
     it('copies over other key/value pairs', () => {
@@ -133,7 +129,7 @@ describe('reducer', () => {
           type: 'GET_CORPORA',
           corpora: [{ name: 'Foo', route: 'foo' }],
         }).otherThing
-      ).to.equal(12)
+      ).toEqual(12)
     })
   })
 })

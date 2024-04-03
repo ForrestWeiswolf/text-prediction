@@ -1,4 +1,3 @@
-const expect = require('chai').expect
 const supertest = require('supertest')
 const server = require('./server.js')
 
@@ -17,7 +16,7 @@ xdescribe('server', () => {
       })
 
       promise.then(res => {
-        expect(res).to.equal('bar')
+        expect(res).toEqual('bar')
       })
     })
 
@@ -32,7 +31,7 @@ xdescribe('server', () => {
       })
 
       promise.then(res => {
-        expect(res).to.equal('foo')
+        expect(res).toEqual('foo')
       })
     })
 
