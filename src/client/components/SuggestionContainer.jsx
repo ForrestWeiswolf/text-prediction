@@ -57,7 +57,6 @@ export function mapDispatch(dispatch) {
 
   return {
     fetchSuggestions: (lastWords, selectedCorpus) => {
-      console.log(lastWords)
       debouncedDispatch(fetchSuggestions(lastWords))
     },
   }
