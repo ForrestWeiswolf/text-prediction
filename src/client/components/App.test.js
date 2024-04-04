@@ -3,17 +3,26 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import TextInput from './TextInput.jsx'
 import { shallow, mount } from 'enzyme'
-import { expect } from 'chai'
+
 import axios from 'axios'
-import MockAdapter from 'axios-mock-adapter'
 import { Provider } from 'react-redux'
 import SuggestionContainer from './SuggestionContainer.jsx'
 
-const mock = new MockAdapter(axios)
-const testReply = ['foo', 'bar', 'baz']
-mock.onGet(/\/api(\/w+)*/).reply(200, testReply)
+jest.mock('axios')
+
+const testResponse = [{name: 'foo', route: 'foo'}, {name: 'bar', route: 'bar'}, {name: 'baz', route: 'baz'}]
 
 describe('App', () => {
+  beforeEach(() => {
+    axios.get.mockImplementation((url) => {
+      if (/\/api(\/w+)*/.test(url)) {
+        return Promise.resolve({ status: 200, data: testResponse })
+      } else {
+        return Promise.reject({ status: 404 })
+      }
+    })
+  })
+
   it('renders without crashing', () => {
     const div = document.createElement('div')
     ReactDOM.render(<App />, div)
@@ -21,7 +30,7 @@ describe('App', () => {
   })
 
   it('renders a Provider', () => {
-    expect(shallow(<App />).find('Provider')).to.have.lengthOf(1)
+    expect(shallow(<App />).find('Provider')).toHaveLength(1)
   })
 
   describe('provider', () => {
@@ -33,11 +42,11 @@ describe('App', () => {
     })
 
     it('renders a TextInput', () => {
-      expect(provider.find(TextInput)).to.have.lengthOf(1)
+      expect(provider.find(TextInput)).toHaveLength(1)
     })
 
     it('renders a SuggestionContainer', () => {
-      expect(shallow(<App />).find(SuggestionContainer)).to.have.lengthOf(1)
+      expect(shallow(<App />).find(SuggestionContainer)).toHaveLength(1)
     })
   })
 })

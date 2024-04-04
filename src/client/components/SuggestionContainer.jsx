@@ -16,12 +16,12 @@ export class SuggestionContainer extends Component {
     }
   }
 
-  componentWillReceiveProps(newProps) {
-    const changedWords = !isEqual(newProps.lastWords,this.props.lastWords)
-    const changedCorpus = newProps.selectedCorpus !== this.props.selectedCorpus
+  componentDidUpdate(prevProps) {
+    const changedWords = !isEqual(prevProps.lastWords, this.props.lastWords)
+    const changedCorpus = prevProps.selectedCorpus !== this.props.selectedCorpus
 
-    if (newProps.selectedCorpus && (changedWords || changedCorpus)) {
-      this.props.fetchSuggestions(newProps.lastWords)
+    if (this.props.selectedCorpus && (changedWords || changedCorpus)) {
+      this.props.fetchSuggestions(this.props.lastWords)
     }
   }
 

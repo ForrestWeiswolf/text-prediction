@@ -5,7 +5,7 @@ import { fetchCorpora, selectCorpus } from '../store/index.js'
 import './Dropdown.css'
 
 export class Dropdown extends Component {
-	componentWillMount(){
+	componentDidMount(){
 		this.props.fetchCorpora()
 	}
 
