@@ -1,5 +1,19 @@
 [
   {
+    "name": "Pride and Prejudice",
+    "filename": "pride_and_prejudice",
+    "start": 2558,
+    "end": 743877,
+    "source": "https://www.gutenberg.org/cache/epub/1342/pg1342.txt"
+  },
+  {
+    "name": "Beowulf",
+    "filename": "beowulf",
+    "start": 919,
+    "end": 135536,
+    "source": "https://www.gutenberg.org/cache/epub/981/pg981.txt"
+  },
+  {
     "name": "Frankenstein; or, the Modern Prometheus",
     "filename": "frankenstein",
     "start": 882,
