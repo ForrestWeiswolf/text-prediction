@@ -1,17 +1,5 @@
 [
   {
-    "name": "Pride and Prejudice",
-    "filename": "pride_and_prejudice",
-    "start": 664,
-    "end": 685408
-  },
-  {
-    "name": "Beowulf",
-    "filename": "beowulf",
-    "start": 31337,
-    "end": 270920
-  },
-  {
     "name": "Frankenstein; or, the Modern Prometheus",
     "filename": "frankenstein",
     "start": 1186,
