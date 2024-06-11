@@ -1,3 +1,6 @@
+# What is this?
+
+Basically, you can pick a corpus and then type in the text box, and it'll suggest three words that would be likely to come next in the corpus you've picked, after the last two (by default) words you've typed.
 ## Running the app
 
 `yarn install`
