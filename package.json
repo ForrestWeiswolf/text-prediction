@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^1.6.7",
-    "build-word-tries": "../build-word-tries",
+    "build-word-tries": "https://github.com/ForrestWeiswolf/word-tries",
     "express": "^4.16.3",
     "lodash.debounce": "^4.0.8",
     "react": "^16.0.0",
