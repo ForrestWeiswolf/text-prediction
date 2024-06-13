@@ -9,7 +9,7 @@ export const SuggestionContainer = (props) => {
   React.useEffect(() => {
     console.log(props.lastWords)
     if (props.selectedCorpus) {
-      fetchSuggestions(props.lastWords)
+      props.fetchSuggestions(props.lastWords)
     }
   }, [props.selectedCorpus, JSON.stringify(props.lastWords)])
 
