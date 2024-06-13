@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { debounce } from 'lodash'
@@ -6,8 +6,7 @@ import SuggestionBox from './SuggestionBox.jsx'
 import { fetchSuggestions } from '../store/index.js'
 
 export const SuggestionContainer = (props) => {
-  React.useEffect(() => {
-    console.log(props.lastWords)
+  useEffect(() => {
     if (props.selectedCorpus) {
       props.fetchSuggestions(props.lastWords)
     }
