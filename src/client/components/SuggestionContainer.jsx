@@ -15,7 +15,7 @@ export const SuggestionContainer = (props) => {
 
 
   return (
-    <div>
+    <div data-testid="suggestion-container">
       {!props.suggestions.map && console.log(props.suggestions)}
       {props.suggestions && props.suggestions.map((suggestion, idx) => (
         <SuggestionBox value={suggestion} key={idx} />

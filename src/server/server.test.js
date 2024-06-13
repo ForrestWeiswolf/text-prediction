@@ -63,7 +63,7 @@ describe('server', () => {
           .expect('Content-Type', /json/)
           .expect(200)
 
-        expect(response.body).toEqual(['twice',  'sister', 'husband'])
+        expect(response.body).toEqual(['twice',  'brother', 'sister'])
       })
     })
   })
