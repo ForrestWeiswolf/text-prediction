@@ -58,7 +58,7 @@ describe('Dropdown', () => {
     )
     const select = screen.getByRole('combobox')
 
-    await fireEvent.change(screen.getByRole('combobox'), {target: {value: 'bar_baz'}})
+    await fireEvent.change(screen.getByRole('combobox'), { target: { value: 'bar_baz' } })
     expect(changeSpy).toHaveBeenCalledWith('bar_baz')
   })
 })

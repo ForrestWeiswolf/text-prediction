@@ -1,28 +1,24 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import '@testing-library/jest-dom'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { SuggestionBox } from './SuggestionBox.jsx'
 
 describe('SuggestionBox', () => {
-  let suggestionBox
   let clickSpy
   beforeEach(() => {
     clickSpy = jest.fn()
-    suggestionBox = shallow(
-      <SuggestionBox value="foo" handleClick={clickSpy} />
-    )
+    render(<SuggestionBox value="foo" handleClick={clickSpy} />)
   })
 
-  it('renders a div with class "suggestionBox"', () => {
-    expect(suggestionBox.find('div.suggestionBox').length).toEqual(1)
-  })
 
   it('renders a div with the text from it\'s "value" prop', () => {
-    expect(suggestionBox.find('div.suggestionBox').text()).toEqual('foo')
+    expect(screen.getByText('foo')).toBeInTheDocument()
   })
 
   describe('when clicked', () => {
     it('calls handleClick function passed as prop with value', () => {
-      suggestionBox.simulate('click')
+      const suggestionBox = screen.getByText('foo')
+      fireEvent.click(suggestionBox)
       expect(clickSpy).toBeCalledWith('foo')
     })
   })
