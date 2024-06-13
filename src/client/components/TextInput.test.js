@@ -1,5 +1,6 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import '@testing-library/jest-dom'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { TextInput } from './TextInput.jsx'
 
 describe('TextInput', () => {
@@ -7,28 +8,23 @@ describe('TextInput', () => {
   let changeSpy
   beforeEach(() => {
     changeSpy = jest.fn()
-    textInput = shallow(<TextInput text={'foo'} handleChange={changeSpy} />)
+    render(<TextInput text={'foo'} handleChange={changeSpy} />)
   })
 
   it('has a textarea', () => {
-    expect(textInput.find('textarea')).toHaveLength(1)
+    expect(screen.getByRole('textbox')).toBeInTheDocument()
   })
 
   it('the value of the text input is the component\'s "text" prop', () => {
-    textInput = shallow(<TextInput text={'foo'} handleChange={changeSpy} />)
-
-    expect(textInput.find('textarea[value="foo"]').length).toEqual(1)
+    expect(screen.getByRole('textbox')).toHaveValue('foo')
   })
 
   describe('when user types in the text input', () => {
-    it('calls handleChange with an event containing the entered text', () => {
-      const evt = { value: 'foo' }
-      textInput
-        .find('textarea')
-        .first()
-        .simulate('change', evt)
+    it('calls handleChange with an event containing the entered text', async () => {
+      const textArea = screen.getByRole('textbox')
+      await fireEvent.change(textArea, { target: { value: 'bar' } })
 
-      expect(changeSpy).toBeCalledWith(evt)
+      expect(changeSpy).toHaveBeenCalledWith('bar')
     })
   })
 })

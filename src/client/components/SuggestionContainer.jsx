@@ -29,7 +29,7 @@ export class SuggestionContainer extends Component {
     const suggestions = this.props.suggestions
 
     return (
-      <div>
+      <div data-testid="suggestion-container">
         {!suggestions.map && console.log(suggestions)}
         {suggestions && suggestions.map((suggestion, idx) => (
           <SuggestionBox value={suggestion} key={idx} />

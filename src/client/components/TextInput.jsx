@@ -7,7 +7,7 @@ import './TextInput.css'
 export const TextInput = props => {
   return (
     <div>
-      <textarea value={props.text} onChange={props.handleChange} />
+      <textarea value={props.text} onChange={e => props.handleChange(e.target.value)} />
     </div>
   )
 }
@@ -24,8 +24,8 @@ function mapStateToProps(state) {
 
 function mapDispatch(dispatch) {
   return {
-    handleChange: function(e) {
-      dispatch(updateText(e.target.value))
+    handleChange: function(value) {
+      dispatch(updateText(value))
     },
   }
 }
