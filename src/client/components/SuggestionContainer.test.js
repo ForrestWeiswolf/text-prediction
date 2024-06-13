@@ -7,7 +7,6 @@ import {
   mapDispatch,
 } from './SuggestionContainer.jsx'
 import store from '../store'
-
 import { Provider } from 'react-redux';
 
 jest.mock('lodash')

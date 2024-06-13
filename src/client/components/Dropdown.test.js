@@ -1,5 +1,6 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import '@testing-library/jest-dom'
+import { fireEvent, render, screen, within, cleanup } from '@testing-library/react';
 import { Dropdown } from './Dropdown.jsx'
 
 describe('Dropdown', () => {
@@ -8,64 +9,56 @@ describe('Dropdown', () => {
     { name: 'bar, baz', route: 'bar_baz' },
   ]
 
-  let dropdown
   beforeEach(() => {
-    dropdown = shallow(
+    render(
       <Dropdown
         corpora={testCorpora}
-        fetchCorpora={() => {}}
-        handleChange={() => {}}
+        fetchCorpora={() => { }}
+        handleChange={() => { }}
       />
     )
   })
 
   it('Renders a <select></select>', () => {
-    expect(dropdown.find('select').length).toEqual(1)
+    expect(screen.getByRole('combobox')).toBeInTheDocument()
   })
 
   it('fetches corpora', () => {
+    cleanup() // TODO: Figure out why this didn't work in an afterEach
     let fetchSpy = jest.fn()
-    dropdown = shallow(
+    render(
       <Dropdown
         corpora={testCorpora}
         fetchCorpora={fetchSpy}
-        handleChange={() => {}}
+        handleChange={() => { }}
       />
     )
-    expect(fetchSpy).toBeCalled()
+    expect(fetchSpy).toHaveBeenCalled()
   })
 
-  describe('select', () => {
-    let select
-    beforeEach(() => {
-      select = dropdown.find('select')
-    })
+  it('has an option for each corpus passed in props', () => {
+    const select = screen.getByRole('combobox')
 
-    it('has an option for each corpus passed in props', () => {
-      testCorpora.forEach(c => {
-        expect(select.find(`option[value="${c.route}"]`).length).toEqual(1)
-      })
+    testCorpora.forEach(c => {
+      const option = within(select).getByText(c.name);
+      expect(option).toHaveAttribute('value', c.route);
     })
+  })
 
-    it('each option has the nae of that corpus', () => {
-      testCorpora.forEach(c => {
-        expect(select.find(`option[value="${c.route}"]`).text()).toEqual(c.name)
-      })
-    })
+  it('calls handleChange when changed', async () => {
+    cleanup()
+    const changeSpy = jest.fn()
 
-    it('calls handleChange when changed', () => {
-      const changeSpy = jest.fn()
-      dropdown = shallow(
-        <Dropdown
-          corpora={testCorpora}
-          fetchCorpora={() => {}}
-          handleChange={changeSpy}
-        />
-      )
+    render(
+      <Dropdown
+        corpora={testCorpora}
+        fetchCorpora={() => { }}
+        handleChange={changeSpy}
+      />
+    )
+    const select = screen.getByRole('combobox')
 
-      select = dropdown.find('select')
-      select.simulate('change', { target: { value: 'bar' } })
-      expect(changeSpy).toBeCalledWith('bar')
-    })
+    await fireEvent.change(screen.getByRole('combobox'), {target: {value: 'bar_baz'}})
+    expect(changeSpy).toHaveBeenCalledWith('bar_baz')
   })
 })
