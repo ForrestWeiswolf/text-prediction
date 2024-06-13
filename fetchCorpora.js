@@ -1,4 +1,4 @@
-const list = require('./src/server/corpora/list.json')
+const list = require('./src/server/list.json')
 const { writeFile, readdir } = require('node:fs/promises')
 
 const fetchCorpora = async () => {

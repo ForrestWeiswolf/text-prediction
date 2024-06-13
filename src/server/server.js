@@ -1,6 +1,6 @@
 const express = require('express')
 const { buildTriesFromFile } = require('./fsUtils.js')
-const list = require('./corpora/list.json')
+const list = require('./list.json')
 
 const app = express()
 

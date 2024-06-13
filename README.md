@@ -13,7 +13,7 @@ If you're running your own instance, you can add a new corpus. There are two way
 
 ### Adding a corpus from a URL
 
-1. Add the name (title) of the text, the filename you want it saved to, and the URL it can be fetched from to `./src/server/corpora/list.json`
+1. Add the name (title) of the text, the filename you want it saved to, and the URL it can be fetched from to `./src/server/list.json`
 2. Optionally, add `start` and `end` keys to the entry in `list.json` (see below for details on what this means)
 3. `yarn run setup`
 
