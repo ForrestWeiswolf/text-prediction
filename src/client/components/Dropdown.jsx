@@ -1,29 +1,27 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetchCorpora, selectCorpus } from '../store/index.js'
 import './Dropdown.css'
 
-export class Dropdown extends Component {
-	componentDidMount(){
-		this.props.fetchCorpora()
-	}
+export const Dropdown = (props) => {
+  useEffect(() => {
+    props.fetchCorpora()
+  }, [])
 
-  render() {
-    return (
-      <div className="dropdown">
-        <select onChange={(e) => {this.props.handleChange(e.target.value)}}>
-          {this.props.corpora.map((corpus, idx) => {
-            return (
-              <option value={corpus.route} key={idx}>
-                {corpus.name}
-              </option>
-            )
-          })}
-        </select>
-      </div>
-    )
-  }
+  return (
+    <div className="dropdown">
+      <select onChange={(e) => { props.handleChange(e.target.value) }}>
+        {props.corpora.map((corpus, idx) => {
+          return (
+            <option value={corpus.route} key={idx}>
+              {corpus.name}
+            </option>
+          )
+        })}
+      </select>
+    </div>
+  )
 }
 
 Dropdown.propTypes = {
