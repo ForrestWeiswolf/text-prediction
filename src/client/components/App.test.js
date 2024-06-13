@@ -1,16 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import '@testing-library/jest-dom'
 import App from './App'
-import TextInput from './TextInput.jsx'
-import { shallow, mount } from 'enzyme'
-
 import axios from 'axios'
-import { Provider } from 'react-redux'
-import SuggestionContainer from './SuggestionContainer.jsx'
+import { render, screen } from '@testing-library/react';
 
 jest.mock('axios')
 
-const testResponse = [{name: 'foo', route: 'foo'}, {name: 'bar', route: 'bar'}, {name: 'baz', route: 'baz'}]
+const testResponse = [{ name: 'foo', route: 'foo' }, { name: 'bar', route: 'bar' }, { name: 'baz', route: 'baz' }]
 
 describe('App', () => {
   beforeEach(() => {
@@ -29,24 +26,22 @@ describe('App', () => {
     ReactDOM.unmountComponentAtNode(div)
   })
 
-  it('renders a Provider', () => {
-    expect(shallow(<App />).find('Provider')).toHaveLength(1)
-  })
 
   describe('provider', () => {
     let provider
     let app
     beforeEach(() => {
-      app = mount(<App />)
-      provider = app.find(Provider).first()
+      render(<App />)
     })
 
-    it('renders a TextInput', () => {
-      expect(provider.find(TextInput)).toHaveLength(1)
+    it('renders a textbox', () => {
+      expect(screen.getByRole('textbox')).toBeInTheDocument()
     })
 
     it('renders a SuggestionContainer', () => {
-      expect(shallow(<App />).find(SuggestionContainer)).toHaveLength(1)
+      expect(screen.getByTestId('suggestion-container')).toBeInTheDocument();
     })
+
+    // TODO: test that the suggestions change when the textbox is typed in?
   })
 })
