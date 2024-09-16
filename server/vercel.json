@@ -3,7 +3,7 @@
   "github": {
     "enabled": true
   },
-  "buildCommand": "yarn setup",
+  "buildCommand": "yarn run setup",
   "builds": [
     {
       "src": "/index.js",
