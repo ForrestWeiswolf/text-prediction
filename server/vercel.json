@@ -1,13 +1,23 @@
 {
   "version": 2,
-  "github": {
-    "enabled": true
-  },
-  "buildCommand": "yarn run setup",
   "builds": [
     {
-      "src": "/index.js",
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "zeroConfig": true,
+        "buildCommand": "yarn run build"
+      }
+    },
+    {
+      "src": "src/index.js",
       "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/index.js"
     }
   ]
 }
