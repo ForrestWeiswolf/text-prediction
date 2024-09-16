@@ -7,7 +7,7 @@
       "config": {
         "zeroConfig": true,
         "buildCommand": "yarn run setup",
-        "outputDirectory": "server"
+        "outputDirectory": "./server"
       }
     },
     {
