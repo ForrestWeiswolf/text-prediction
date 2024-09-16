@@ -5,10 +5,10 @@
   },
   "builds": [
     {
-      "src": "src/index.js",
+      "src": "package.json",
       "use": "@vercel/node",
       "config": {
-        "buildCommand": "yarn run build"
+        "command": "yarn run vercel-build"
       }
     }
   ],
