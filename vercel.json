@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "github": {
+    "enabled": true
+  },
+  "builds": [
+    {
+      "src": "/server/index.js",
+      "use": "@vercel/node"
+    }
+  ]
+}
