@@ -7,7 +7,6 @@
     "express": "^4.16.3"
   },
   "scripts": {
-    "vercel-build": "yarn run build && yarn run start",
     "start": "nodemon src/server/index.js",
     "test": "jest",
     "build": "node ./fetchCorpora.js"
