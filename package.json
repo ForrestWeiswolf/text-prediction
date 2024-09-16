@@ -2,8 +2,8 @@
   "name": "text-prediction",
   "scripts": {
     "start": "concurrently \"(cd client && yarn start)\" \"(cd server && yarn start)\"",
-    "test": "(cd ../server && yarn test); (cd client && yarn test --no-watch --no-watchAll)",
-    "setup": "(cd ../server && yarn install && yarn run setup); (cd client && yarn install)"
+    "test": "(cd ./server && yarn test); (cd client && yarn test --no-watch --no-watchAll)",
+    "setup": "(cd ./server && yarn install && yarn run setup); (cd client && yarn install)"
   },
   "devDependencies": {
     "concurrently": "^9.0.1"
