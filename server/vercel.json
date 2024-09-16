@@ -3,5 +3,11 @@
   "github": {
     "enabled": true
   },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/index.js"
+    }
+  ],
   "buildCommand": "yarn run build"
 }
