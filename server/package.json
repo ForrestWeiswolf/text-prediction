@@ -9,7 +9,7 @@
   "scripts": {
     "start": "nodemon src/server/index.js",
     "test": "jest",
-    "build": "node ./fetchCorpora.js"
+    "setup": "node ./fetchCorpora.js"
   },
   "proxy": "http://localhost:8080",
   "devDependencies": {

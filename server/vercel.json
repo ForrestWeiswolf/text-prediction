@@ -3,16 +3,11 @@
   "github": {
     "enabled": true
   },
+  "buildCommand": "yarn run setup",
   "builds": [
     {
-      "src": "src/index.js",
+      "src": "/index.js",
       "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "src/index.js"
     }
   ]
 }
