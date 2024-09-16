@@ -2,10 +2,6 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/index.js",
-      "use": "@vercel/node"
-    },
-    {
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
@@ -13,6 +9,10 @@
         "buildCommand": "yarn run setup",
         "outputDirectory": "."
       }
+    },
+    {
+      "src": "src/index.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
