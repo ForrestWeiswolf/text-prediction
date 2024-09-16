@@ -3,7 +3,7 @@
 Basically, you can pick a corpus and then type in the text box, and it'll suggest three words that would be likely to come next in the corpus you've picked, after the last two (by default) words you've typed.
 ## Running the app
 
-`yarn run build`
+`yarn run setup`
 `yarn start`
 
 ## Adding a corpus
@@ -14,7 +14,7 @@ If you're running your own instance, you can add a new corpus. There are two way
 
 1. Add the name (title) of the text, the filename you want it saved to, and the URL it can be fetched from to `./server/list.json`
 2. Optionally, add `start` and `end` keys to the entry in `list.json` (see below for details on what this means)
-3. `cd server && yarn run build`
+3. `cd server && yarn run setup`
 
 ### Adding a corpus from a file
 1. Put a `.txt` file in the directory `./server/corpora/`
