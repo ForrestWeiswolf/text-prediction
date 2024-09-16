@@ -1,7 +1,15 @@
 const list = require('./list.json')
-const { writeFile, readdir } = require('node:fs/promises')
+const { writeFile, readdir, mkdir } = require('node:fs/promises')
 
 const fetchCorpora = async () => {
+  try {
+    await mkdir('./corpora')
+  } catch (err) {
+    if (err.code !== 'EEXIST') {
+      throw err
+    }
+  }
+
   const corpora = await readdir('./corpora')
 
   console.log(corpora)
