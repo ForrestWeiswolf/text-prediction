@@ -6,10 +6,7 @@
   "builds": [
     {
       "src": "src/index.js",
-      "use": "@vercel/node",
-      "config": {
-        "buildCommand": "yarn run build"
-      }
+      "use": "@vercel/node"
     }
   ],
   "routes": [
