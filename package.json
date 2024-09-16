@@ -19,9 +19,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "setup": "node ./fetchCorpora.js",
-    "docker-build": "docker build . -t text-prediction",
-    "docker-start": "docker run --rm -p 3000:3000 text-prediction"
+    "setup": "node ./fetchCorpora.js"
   },
   "proxy": "http://localhost:8080",
   "devDependencies": {
