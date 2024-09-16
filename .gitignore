@@ -1,15 +1,15 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
-src/server/corpora/*
+server/corpora/*
 
 # dependencies
-/node_modules
+**/node_modules
 
 # testing
 /coverage
 
 # production
-/build
+client/build
 
 # misc
 .DS_Store
