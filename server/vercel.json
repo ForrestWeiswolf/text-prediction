@@ -6,7 +6,8 @@
       "use": "@vercel/static-build",
       "config": {
         "zeroConfig": true,
-        "buildCommand": "yarn run setup"
+        "buildCommand": "yarn run setup",
+        "outputDirectory": "server"
       }
     },
     {
