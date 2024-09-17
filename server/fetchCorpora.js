@@ -22,4 +22,4 @@ const fetchCorpora = async () => {
   })
 }
 
-fetchCorpora()
+export default fetchCorpora

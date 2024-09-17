@@ -4,6 +4,8 @@ const list = require('./list.json')
 
 const app = express()
 
+await fetchCorpora()
+
 list.forEach(async corpus => {
   console.log('creating routes from', corpus.name)
   const tries = await buildTriesFromFile(corpus)
