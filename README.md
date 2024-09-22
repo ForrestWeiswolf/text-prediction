@@ -14,7 +14,7 @@ If you're running your own instance, you can add a new corpus. There are two way
 
 1. Add the name (title) of the text, the filename you want it saved to, and the URL it can be fetched from to `./server/list.json`
 2. Optionally, add `start` and `end` keys to the entry in `list.json` (see below for details on what this means)
-3. `cd server && yarn run setup`
+3. `yarn run setup`
 
 ### Adding a corpus from a file
 1. Put a `.txt` file in the directory `./server/corpora/`

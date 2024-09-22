@@ -8,7 +8,7 @@ const DEPTH = 2
 const promisifiedReadFile = util.promisify(fs.readFile)
 
 async function buildTriesFromFile(corpus) {
-  const filePath = `${process.env.CORPUS_DIR}/${corpus.filename}.txt`
+  const filePath = `./corpora/${corpus.filename}.txt`
   const file = await promisifiedReadFile(path.join(__dirname, filePath), {
     encoding: 'utf-8',
   })
