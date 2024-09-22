@@ -28,7 +28,6 @@ function mapDispatch(dispatch) {
   return {
     handleClick: function(word) {
       dispatch(addToText(word + ' '))
-      dispatch(fetchSuggestions([word]))
     },
   }
 }

@@ -17,7 +17,6 @@ TextInput.propTypes = {
   handleChange: PropTypes.func.isRequired
 }
 
-
 function mapStateToProps(state) {
   return { text: state.text }
 }
