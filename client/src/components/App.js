@@ -14,6 +14,15 @@ class App extends Component {
             <TextInput />
             <SuggestionContainer />
             <Dropdown />
+            <footer>
+              <small>
+                <details>
+                  <summary>What is this?</summary>
+                  <p>You can pick a source text, and then type in the text box, and it'll suggest three words that would be likely to come next after the last two words you've typed, in the book that you picked.</p>
+                  <p>The code can be found <a href="https://github.com/ForrestWeiswolf/text-prediction">here</a>, and the website of the person who made it can be found <a href='https://forrestweiswolf.github.io'>here</a>.</p>
+                </details>
+              </small>
+            </footer>
           </div>
         </Provider>
       </div>
