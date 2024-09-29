@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <div className="App">
         <Provider store={store}>
-          <div>
+          <main>
             <TextInput />
             <SuggestionContainer />
             <Dropdown />
@@ -23,7 +23,7 @@ class App extends Component {
                 </details>
               </small>
             </footer>
-          </div>
+          </main>
         </Provider>
       </div>
     )

@@ -18,3 +18,7 @@
 .App-intro {
   font-size: large;
 }
+
+.App main {
+  width: 90%;
+}
