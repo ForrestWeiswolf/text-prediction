@@ -3,8 +3,10 @@
 Basically, you can pick a corpus and then type in the text box, and it'll suggest three words that would be likely to come next in the corpus you've picked, after the last two (by default) words you've typed.
 ## Running the app
 
-`yarn run setup`
-`yarn start`
+1. `yarn run setup`
+2. `yarn start` (Runs production build on port 8080)
+OR
+`yarn start-dev` (Runs development build on port 3000. The production build on port 8080 will still served, but won't rebuilt and may be out of date.)
 
 ## Adding a corpus
 

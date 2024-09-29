@@ -1,8 +1,11 @@
 const express = require('express')
+const path = require('path');
 const { buildTriesFromFile } = require('./fsUtils.js')
 const list = require('./list.json')
 
 const app = express()
+
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 list.forEach(async corpus => {
   console.log('creating routes from', corpus.name)
