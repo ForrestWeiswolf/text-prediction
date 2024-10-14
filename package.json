@@ -3,8 +3,8 @@
   "scripts": {
     "start": "cd client && yarn build && cd .. && cd server && yarn start",
     "start-dev": "concurrently \"(cd client && yarn start)\" \"(cd server && yarn start)\"",
-    "test": "(cd ../server && yarn test); (cd client && yarn test --no-watch --no-watchAll)",
-    "setup": "(cd ../server && yarn install && yarn setup); (cd client && yarn install)"
+    "test": "(cd server && yarn test); (cd client && yarn test --no-watch --no-watchAll)",
+    "setup": "(cd server && yarn install && yarn setup); (cd client && yarn install)"
   },
   "devDependencies": {
     "concurrently": "^9.0.1"
