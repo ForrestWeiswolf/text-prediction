@@ -5,11 +5,13 @@ const WordTries = require('build-word-tries')
 
 const DEPTH = 2
 
+const corporaPath = path.join(__dirname, '/corpora')
+
 const promisifiedReadFile = util.promisify(fs.readFile)
 
 async function buildTriesFromFile(corpus) {
-  const filePath = `./corpora/${corpus.filename}.txt`
-  const file = await promisifiedReadFile(path.join(__dirname, filePath), {
+  const filePath = path.join(corporaPath, `/${corpus.filename}.txt`)
+  const file = await promisifiedReadFile(filePath, {
     encoding: 'utf-8',
   })
 
