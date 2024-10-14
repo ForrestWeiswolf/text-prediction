@@ -5,6 +5,8 @@ import { debounce } from 'lodash'
 import SuggestionBox from './SuggestionBox.jsx'
 import { fetchSuggestions } from '../store/index.js'
 
+const DEPTH = 2
+
 export const SuggestionContainer = (props) => {
   useEffect(() => {
     if (props.selectedCorpus) {
@@ -30,7 +32,7 @@ SuggestionContainer.propTypes = {
 export function mapState(state) {
   const words = state.text.split(/\W+/).filter(word => word !== '')
   return {
-    lastWords: words.slice(Math.max(0, words.length - 2)),
+    lastWords: words.slice(Math.max(0, words.length - DEPTH)),
     suggestions: state.suggestions,
     selectedCorpus: state.selectedCorpus,
   }
