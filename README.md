@@ -4,7 +4,7 @@ Basically, you can pick a corpus and then type in the text box, and it'll sugges
 
 ## Why not use an LLM? They're great at next-token prediction.
 
-Well, for starters, I did about 80% of the work of building this in *2018*. That said, this does have a couple of advantages:
+Well, it's partly because I built the original version of this in 2018. That said, this does have a couple of advantages:
 - Swapping in a new corpus in this app is nearly trivial if you're running it locally, much easier than fine-tuning an LLM to imitate a particular text it's not already familiar with
 - If you have a CS background, it should be pretty easy to fully understand what's going on under the hood here (markov chains, basically), whereas not even the experts *fully* understand what goes on inside a large language model.
 
